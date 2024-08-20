@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+
+\title{Projeto e Análise de Algoritmos}
+\author{Matheus Gabriel}
+\date{Agosto de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Ponteiros}
+
+\subsection{Uso simples}
+
+Considere o seguinte código em C:
+
+\begin{minted}[frame=single,framesep=10pt]{c}
+int x = 1, y = 2, z[10];
+int *ip;
+
+ip = &x;   // ip aponta para a variável x
+y = *ip;   // y recebe o valor de x (que é 1)
+*ip = 0;   // o valor de x é alterado para 0
+ip = &z[0]; // ip aponta para o primeiro elemento do array z
+\end{minted}
+
+Na verdade, ao contrário do que muitos pensam, o ponteiro é armazenado na variável \textbf{ip} e não no asterisco \texttt{*}. O asterisco é utilizado para duas finalidades diferentes:
+\begin{itemize}
+    \item \textbf{Declaração de ponteiro:} Para declarar um ponteiro, como em \texttt{int *ip;}.
+    \item \textbf{Desreferenciação:} Para acessar o valor apontado pelo ponteiro, como em \texttt{*ip}.
+\end{itemize}
+
+\clearpage
+
+\subsubsection{Maneira errada}
+\begin{minted}[frame=single,framesep=10pt]{c}
+void troca(int a, int b) {
+    int aux;
+    a = b;
+    b = aux;
+}
+
+int main (void) {
+    int x = 1, y = 2;
+    printf("Antes: x = %d e y = %d", x, y);
+    troca(x, y);
+    printf("Depois: x = %d e y = %d", x, y);
+    return 0;
+}
+\end{minted}
+Antes: x = 1 e y = 2   \\
+Depois: x = 1 e y = 2
+
+\vspace{10pt}
+
+\subsubsection{Maneira certa}
+\begin{minted}[frame=single,framesep=10pt]{c}
+void troca(int *a, int *b) {
+    int aux;
+    aux = *a;  // Armazena o valor de *a em aux
+    *a = *b;   // Atribui o valor de *b a *a
+    *b = aux;  // Atribui o valor de aux a *b
+}
+
+int main(void) {
+    int x = 1, y = 2;
+    printf("Antes: x = %d e y = %d\n", x, y);
+    troca(&x, &y);  // Passa os endereços das variáveis x e y
+    printf("Depois: x = %d e y = %d\n", x, y);
+    return 0;
+}
+\end{minted}
+Antes: x = 1 e y = 2   \\
+\textbf{Depois: x = 2 e y = 1}
+
+\subsection{Alocação dinâmica de memória}
+
+O \texttt{malloc} é usado para fazer essa alocação dinâmica de memória:
+
+\begin{minted}[frame=single,framesep=10pt]{c}
+int main(void) {
+    int i;
+    int *arr;
+    int n = 5; // Número de elementos no array
+
+    // Aloca memória para um array de n inteiros
+    arr = (int *)malloc(n * sizeof(int));
+    
+    // Inicializa o array com valores
+    for (i = 0; i < n; i++) {
+        arr[i] = i * 10;
+    }
+
+    // Imprime os valores do array
+    printf("Valores no array:\n");
+    for (i = 0; i < n; i++) {
+        printf("arr[%d] = %d\n", i, arr[i]);
+    }
+
+    // Libera a memória alocada
+    free(arr);
+
+    return 0;
+}
+\end{minted}
+
+\section{Estruturas \texttt{structs}}
+
+O código abaixo usa duas estruturas, \texttt{Ponto} e \texttt{Retângulo}, note o modo que elas são declaradas:
+
+\begin{minted}[frame=single,framesep=10pt]{c}
+#include <stdio.h>
+
+typedef struct {
+    int x;
+    int y;
+} Ponto;
+
+typedef struct {
+    Ponto cantoInferiorEsquerdo;
+    Ponto cantoSuperiorDireito;
+} Retangulo;
+
+int main(void) {
+    Ponto p1 = {0, 0};
+    Ponto p2 = {10, 5};
+    
+    Retangulo r;
+    r.cantoInferiorEsquerdo = p1;
+    r.cantoSuperiorDireito = p2;
+    
+    return 0;
+}
+\end{minted}
+
+No código \texttt{struct Ponto p1;}, a variável é do tipo \texttt{struct Ponto} e não apenas \texttt{Ponto}. 
+
+\section{Estruturas auto-referenciais}
+
+Por exemplo, uma lista ligada é um conjunto de itens onde cada item é parte de um nó que também contém um link para um nó. Em C temos:
+
+\begin{minted}[frame=single,framesep=10pt]{c}
+typedef struct node *link;
+
+struct node {
+    int item;
+    link next;
+};
+\end{minted}
+
+\end{document}
