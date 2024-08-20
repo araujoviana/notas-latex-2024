@@ -3,7 +3,7 @@ Anotações pessoais das aulas em LaTeX de 2024, as versões em .pdf também est
 
 ## Uso dos scripts extras
 
-### Pra que?
+### Pra quê?
 Os scripts foram feitos para acelerar a manutenção dos arquivos, todos são feitos em python (até o momento de eu escrever isso só existe um script).
 
 ### Execução
