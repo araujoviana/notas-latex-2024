@@ -1,0 +1,180 @@
+\documentclass{article}
+\usepackage{graphicx} 
+\usepackage{amsmath} 
+\usepackage{tcolorbox}
+\usepackage{mdframed} 
+\usepackage{array} 
+\usepackage{caption}
+\usepackage{float}
+
+\title{Modelagem Matemática I \\ 
+        \large Primeiros exercícios de programação çlinear}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!75!black, title=Aviso]
+Não consegui anotar as explicações dos exercícios, então tenho apenas os resultados finais. 
+\end{tcolorbox}
+
+\section{Primeiro problema}
+
+\subsection{Enunciado}
+\begin{mdframed}[backgroundcolor=yellow!10, linecolor=black, linewidth=2pt]
+\textbf{A Marcenaria (recriação do enunciado original)}
+
+Uma marcenaria fabrica dois tipos de móveis: mesas e armários. Cada mesa gera um lucro de 4, enquanto cada armário gera 1 de lucro. Devido a restrições de produção, a marcenaria precisa maximizar o lucro total, respeitando as seguintes condições:
+Para cada mesa produzida, são necessários 2 metros de madeira, e para cada armário, 3 metros de madeira. No total, a marcenaria possui até 12 metros de madeira disponíveis.
+O tempo de trabalho necessário para produzir uma mesa é de 2 horas, e para produzir um armário é de 1 hora. A marcenaria possui um total de 8 horas de trabalho disponíveis.
+
+Determine quantas mesas e quantos armários a marcenaria deve produzir para maximizar o lucro, respeitando as restrições de materiais e tempo.
+\end{mdframed}
+
+\subsection{Modelagem}
+
+Considere o seguinte problema de programação linear:
+
+\begin{align*}
+    \text{Maximizar} \quad & Z = 4x_1 + x_2 \\
+    \text{Sujeito às restrições:} \quad & \\
+    & 2x_1 + 3x_2 \leq 12 \\
+    & 2x_1 + x_2 \leq 8 \\
+    & x_1 \geq 0 \\
+    & x_2 \geq 0
+\end{align*}
+
+Onde:
+\begin{itemize}
+    \item \(x_1\) representa o número de mesas.
+    \item \(x_2\) representa o número de armários.
+\end{itemize}
+
+\subsection{Resposta}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Resultado]
+A solução ótima é obtida quando:
+\begin{align*}
+    x_1^* &= 4 \\
+    x_2^* &= 0
+\end{align*}
+E o valor máximo da função objetivo \(Z\) é:
+\begin{align*}
+    Z^* &= 4x_1^* + x_2^* \\
+    Z^* &= 4 \cdot 4 + 0 \\
+    Z^* &= 16
+\end{align*}
+\end{tcolorbox}
+
+\section{Segundo problema}
+
+\subsection{Enunciado}
+
+\begin{mdframed}[backgroundcolor=yellow!10, linecolor=black, linewidth=2pt]
+\textbf{Fábrica de sapatos e botinas}
+
+Uma fábrica produz sapatos e botinas. Através da tabela abaixo, formule um modelo que maximize o lucro da fábrica.
+\end{mdframed}
+
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\textbf{Matéria Prima} & \textbf{Sapatos} & \textbf{Botinas} & \textbf{Disponibilidade} \\
+\hline
+Couro & 2 & 1 & 8 \\
+\hline
+Borracha & 1 & 2 & 7 \\
+\hline
+Cola & 0 & 1 & 3 \\
+\hline
+\textbf{Lucro por unidade (em R\$)} & \textbf{1} & \textbf{1} & \textbf{-} \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Modelagem}
+
+Modelando o problema temos:
+\\
+Onde:
+\begin{itemize}
+    \item \(x_1\) representa os valores do couro.
+    \item \(x_2\) representa os valores da borracha.
+\end{itemize}
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=red!75!black, title=Importante]
+Apesar de existirem três itens na coluna de matéria prima, a cola não conta como \(x_3\)
+\end{tcolorbox}
+
+\begin{align*}
+    \text{Maximizar} \quad & L = 1x_1 + 1x_2 \\
+    \text{Sujeito às restrições:} \quad & \\
+    & 2x_1 + x_2 \leq 8 \\
+    & x_1 + 2x_2 \leq 7 \\
+    & x_2 \leq 3 \\
+    & x_1 \geq 0 \\
+    & x_2 \geq 0
+\end{align*}
+
+\subsection{Resposta}
+
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Resultado]
+A solução ótima é obtida quando:
+\begin{align*}
+    x_1^* &= 3 \\
+    x_2^* &= 2
+\end{align*}
+E o valor máximo da função objetivo \(L\) é:
+\begin{align*}
+    L^* &= 5
+\end{align*}
+\end{tcolorbox}
+
+
+\clearpage
+
+\section{Terceiro problema}
+\subsection{Enunciado}
+\begin{mdframed}[backgroundcolor=yellow!10, linecolor=black, linewidth=2pt]
+    \textbf{Lucro de vendas}
+    
+    Um fabricante de bombons tem estocado bombons de chocolate, sendo 130kg com recheio de cerejas e 170kg com recheio de menta. Ele decide vender o estoque na forma de dois pacotes sortidos diferentes. Um pacote contém uma mistura com metade do peso em bombons de cereja e metade em menta e vende por R\$ 20,00 por kg. O outro pacote contpem uma mistura de um terço de bombons de cereja e dois terços de menta e vende por R\$ 12,50 por kg. O vendedor deveria preparar quantos quilos de cada mistura a fim de maximizar o seu lucro de vendas?
+\end{mdframed}
+
+\subsection{Modelagem}
+Modelando o problema temos:
+
+\begin{align*}
+    \text{Maximizar} \quad & L = 20x_1 + 12,5x_2 \\
+    \text{Sujeito às restrições:} \quad & \\
+    & \frac{x_1}{2} + \frac{x_2}{3} \leq 130 \\
+    & \frac{x_1}{2} + \frac{2x_2}{3}\leq 170 \\
+    & x_1 \geq 0 \\
+    & x_2 \geq 0
+\end{align*}
+
+
+\begin{itemize}
+    \item \(x_1\) representa o Kg do pacote 1.
+    \item \(x_2\) representa o Kg do pacote 2.
+\end{itemize}
+
+
+\subsection{Resposta}
+
+\begin{tcolorbox}[colback=blue!5!white, colframe=blue!75!black, title=Resultado]
+A solução ótima é obtida quando:
+\begin{align*}
+    x_1^* &= 260 \\
+    x_2^* &= 0
+\end{align*}
+E o valor máximo da função objetivo \(L\) é:
+\begin{align*}
+    L^* &= 5200
+\end{align*}
+\end{tcolorbox}
+
+\end{document}
