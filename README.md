@@ -3,7 +3,7 @@ Anotações pessoais das aulas em LaTeX de 2024, as versões em .pdf também est
 
 ## Uso dos scripts extras
 
-### Pra que?
+### Pra quê?
 Os scripts foram feitos para acelerar a manutenção dos arquivos, todos são feitos em python (até o momento de eu escrever isso só existe um script).
 
 ### Execução
@@ -14,3 +14,7 @@ Os scripts são feitos com o Linux em mente então é possível que a manipulaç
 ```bash
 ./(seu caminho atual)/extras/renomear-auto.py
 ```
+
+## Anotações em .tex
+
+**Todas as anotações** foram realizadas no Overleaf e não foram testadas em uma instalação local. Apesar de não haver registros de erros ignorados, é possível que haja problemas de compilação. Portanto, a compilação local pode apresentar diferenças em relação ao ambiente do Overleaf.
