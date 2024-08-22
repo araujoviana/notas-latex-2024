@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+
+\title{Estrutura de Dados I
+\\ \large Tipos de Dados em Java}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Tipos de variáveis}
+\subsection{Tipos primitivos}
+São os tipos criados pela própria linguagem de programação. \\
+Cada tipo ocupa uma quantidade de bytes diferente:
+
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{|c|c|l|}
+        \hline
+        \textbf{Tipo de Dados} & \textbf{Tamanho (Bytes)} & \textbf{Descrição simplificada} \\
+        \hline
+        byte & 1 & Número inteiro pequeno \\
+        short & 2 & Número inteiro médio \\
+        int & 4 & Número inteiro \\
+        long & 8 & Número inteiro grande \\
+        float & 4 & Número real de precisão simples \\
+        double & 8 & Número real de precisão dupla \\
+        char & 2 & Carácter Unicode \\
+        boolean & 1 (ou 1 bit, em certos casos) & Valor lógico (true/false) \\
+        \hline
+    \end{tabular}
+\end{table}
+
+
+Ou use a \href{https://www.w3schools.com/java/java_data_types.asp}{tabela do W3Schools} como referência.
+\subsection{Tipos estruturados (classes)}
+São criados a partir da composição de tipos primitivos. O maior exemplo são as próprias classes.
+
+\begin{minted}[
+linenos
+]
+{java}
+// Estudante.java
+public class Estudante {
+    private String matricula;
+    private String nome;
+    private float n1;
+    private float n2;
+    private float sub;
+    private float pf;
+}
+\end{minted}
+Ao invés de armazenar as variáveis separadamente eles ficam juntas dentro da classe \texttt{Estudante}, o que ajuda na organização e manutenção do código.
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!75!black, title=Aviso]
+O conceito de visibilidade utilizado por \texttt{public} e \texttt{private} será explicado em anotações futuras, por enquanto eles podem ser ignorados.
+\end{tcolorbox}
+
+\clearpage
+
+\section{Declaração de classes}
+O código a seguir declara os objetos \texttt{estudante} e \texttt{st}, é importante que o programa saiba aonde essa classe está armazenada, então por conveniência todos os arquivos \texttt{.java} desse exemplo estão no mesmo diretório.
+\begin{minted}[linenos]{java}
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Estudante estudante = new Estudante();
+        Estudante st;
+        st = new Estudante();
+    }
+}    
+\end{minted}
+
+\clearpage
+
+\section{Getters e Setters}
+Os métodos \textit{getters} e \textit{setters} são usados para acessar um valor e definir um valor respectivamente. A norma para a nomenclatura desses tipos de métodos segue o estilo do exemplo a seguir:
+\begin{minted}[linenos]{java}
+// Estudante.java
+public class Estudante {
+    private String matricula;
+    private String nome;
+    private float n1;
+    private float n2;
+    private float sub;
+    private float pf;
+
+    public String getMatricula() {
+        return matricula;
+    }
+
+    public void setMatricula(String matricula) {
+        this.matricula = matricula;
+    }
+
+}
+\end{minted}
+
+\begin{minted}[linenos]{java}
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        Estudante estudante = new Estudante();
+        Estudante st;
+        st = new Estudante();
+
+        estudante.setMatricula("PRIMEIRO");
+
+        System.out.println(estudante.getMatricula());
+    }
+}
+
+\end{minted}
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!75!black, title=Aviso]
+Métodos são "praticamente" semelhantes às funções, mas elas estão sempre presentes dentro de uma classe.
+\end{tcolorbox}
+
+\subsection{Uso do \texttt{this.}}
+O \texttt{this.} é usado para alterar a variável da instância criada (\texttt{estudante} no caso do exemplo anterior), se usarmos \texttt{matricula} diretamente alteramos o valor do próprio parâmetro, o que pode causar erros em operações futuras com essa mesma classe.
+
+\subsection{Exemplo de setter modificado}
+O codigo interno dos getters e setters não precisam seguir o mesmo modelo, no exemplo a seguir, alteramos o setter para que o valor (da instância) nunca seja negativo.
+\begin{minted}[linenos]{java}
+// InteiroPositivo.java
+public class InteiroPositivo {
+    private int valor;
+
+    public int getValor() {
+        return valor;
+    }
+
+    public void setValor(int valor) {
+        if (valor < 0) {
+            this.valor = -valor;
+        }
+        else {
+            this.valor = valor;
+        }
+    }
+}
+\end{minted}
+\end{document}
