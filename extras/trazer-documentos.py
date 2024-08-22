@@ -17,3 +17,7 @@ for arquivo in arquivos_tex:
 for arquivo in arquivos_pdf:
     shutil.move(arquivo, pasta_atual)
     print(f'Movido {arquivo} para {pasta_atual}')
+    
+print("Pronto")
+
+    
