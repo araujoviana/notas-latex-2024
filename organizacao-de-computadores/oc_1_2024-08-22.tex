@@ -1,0 +1,167 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}
+
+\title{Organização de Computadores \\
+    \large Programação em Assembly MIPS}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+
+A linguagem Assembly é uma das formas mais diretas de interagir com a arquitetura de um computador, oferecendo um nível de controle próximo ao da linguagem de máquina. Neste semestre, focaremos na programação em Assembly para a arquitetura MIPS. Utilizaremos o IDE MARS (MIPS Assembler and Runtime Simulator) para a edição e execução dos nossos códigos.
+
+\section{Programação básica}
+
+Os passos aqui descritos não são necessariamente os mesmo passos de todo código Assembly (obviamente).
+\subsection{O arquivo}
+Para os exemplos discutidos neste documento, utilizamos o arquivo denominado \texttt{ExemploOperacoesAritmeticas.asm}, disponibilizado pelo professor na plataforma Moodle. Os comentários são do professor.
+\begin{tcolorbox}[colback=yellow!10!white, colframe=yellow!75!black, title=Aviso]
+O arquivo .asm do exemplo, e a maioria (senão todos) dos outros exemplos de código não são incluídos no repositório git, porém, em alguns documentos as explicações juntas já formam o código completo.
+\end{tcolorbox}
+
+\subsection{Definição de variáveis}
+
+\begin{minted}[
+linenos
+]
+{asm}
+.data
+# .data EH O SEGMENTO ONDE DECLARAMOS AS "VARIAVEIS"
+
+N1: .asciiz "Digite o 1o numero: "
+N2: .asciiz "Digite o 2o numero: "
+MsgSoma: .asciiz "\nSoma = "
+MsgSub: .asciiz "\nSubtracao = "
+MsgMul: .asciiz "\nMultiplicacao = "
+\end{minted}
+
+
+\begin{itemize}
+    \item \texttt{.data} indica o começo da seção onde são declaradas as variáveis
+    \item \texttt{.asciiz} armazena a string no segmento de dados e adiciona um terminador nulo \texttt{\textbackslash0}.
+\end{itemize}
+Esse código seria equivalente à \texttt{MsgSoma = "Soma = "} na linguagem Python
+
+\subsection{Atribuição de valores aos registradores e entrada do usuário}
+\begin{minted}[
+linenos
+]{asm}
+.text
+# .text EH O SEGMENTO QUE CONTEM AS INSTRUCOES/PROGRAMA
+
+# EM ASSEMBLY, A SYSCALL EH UTILIZADA PARA VARIAS ACOES: LER DADOS DO TECLADO, 
+# IMPRIMIR ALGO NA TELA, FINALIZAR O PROGRAMA, ETC
+
+# IMPRIMIR A MENSAGEM N1 NA TELA
+li $v0,4 # ATRIBUINDO O VALOR 4 PARA O REG $v0 
+# (COD 4: INDICA PRINT DE STRING P/ SYSCALL)
+la $a0,N1 # CARREGANDO O END. DA VAR N1 PARA DENTRO DO REGISTRADOR a0
+# syscall #SYSCALL CHAMA O SO PARA EXECUTAR A ACAO RELATIVA AO CODIGO QUE ESTA NO $v0
+
+# LER UM INTEIRO DIGITADO PELO USUARIO
+
+li $v0,5 # ATRIBUINDO O VALOR 5 PARA O REG $v0 
+# (COD 5: INDICA INPUT DE INT P/ SYSCALL) 
+syscall
+
+# FAZER UMA COPIA DO DADO LIDO
+move $t0, $v0 # COPIANDO O CONTEUDO DE $v0 PARA $t0
+
+
+# IMPRIMIR A MENSAGEM N2 NA TELA
+li $v0,4 # ATRIBUINDO O CONTEÚDO DO $v0 PARA 4 (PRINT)
+la $a0,N2
+syscall
+
+# LER UM INTEIRO DIGITADO PELO USUARIO
+li $v0,5 # ATRIBUINDO O VALOR 5 PARA O REG $v0 
+# (COD 5: INDICA INPUT DE INT P/ SYSCALL) 
+syscall
+
+# FAZER COPIA DO DADO LIDO
+move $t1, $v0 # COPIANDO O CONTEUDO DE $v0 PARA $t1
+\end{minted}
+
+\begin{itemize}
+    \item \texttt{.text} indica o começo da seção que contém as instruções do programa
+    \item \texttt{li} atribui uma \textbf{constante} (e.g 4, 2) para o registrador especificado.
+    \item \texttt{la} atribui uma \textbf{variável} (e.g N1, MsgSoma) para o registrador especificado.
+    \item \texttt{syscall} chama o sistema operacional para executar as ações definidas anteriormente.
+    \item \texttt{move} copia o conteúdo de um registrador para outro.
+\end{itemize}
+
+Resumindo, esse trecho de código atribui os valores definidos em \texttt{.data} para os registradores para serem impressos depois. As constantes usadas em \texttt{li} são específicas para o tipo de syscall que o usuário deseja fazer, use a \href{https://courses.missouristate.edu/kenvollmar/mars/help/syscallhelp.html}{tabela de syscalls do MIPS} como referência.
+
+\subsection{Cálculo das operações}
+
+\begin{minted}[
+linenos
+]{asm}
+# SOMA $t0 COM $t1 E ARMAZENA O RESULTADO EM $t2
+add $t2, $t0, $t1
+# add EH A OPERACAO DE ADICAO
+# $t2 É O REGISTRADOR DE DESTINO
+# $t0 E $t1 SÃO OS REGISTRADORES DAS VARIAVEIS N1 E N2
+
+# IMPRIMIR A MENSAGEM DE SOMA = NA TELA
+li $v0,4
+la $a0,MsgSoma
+syscall
+
+# IMPRIMIR O RESULTADO NA TELA
+li $v0,1
+move $a0, $t2
+syscall
+
+# SUBTRACAO $t0 COM $t1 E ARMAZENA O RESULTADO EM $t2
+sub $t2, $t0, $t1
+# sub EH A OPERACAO DE SUBTRACAO
+# $t2 É O REGISTRADOR DE DESTINO
+# $t0 E $t1 SÃO OS REGISTRADORES DAS VARIAVEIS N1 E N2
+
+# IMPRIMIR A MENSAGEM DE RESPOSTA NA TELA
+li $v0,4
+la $a0,MsgSub
+syscall
+
+# IMPRIMIR O RESULTADO NA TELA
+li $v0,1
+move $a0, $t2
+syscall
+
+# MULTIPLICACAO $t0 COM $t1 E ARMAZENA O RESULTADO EM $t2
+mul $t2, $t0, $t1
+# mul EH A OPERACAO DE MULTIPLICACAO
+# $t2 É O REGISTRADOR DE DESTINO
+# $t0 E $t1 SÃO OS REGISTRADORES DAS VARIAVEIS N1 E N2
+
+# IMPRIMIR A MENSAGEM DE RESPOSTA NA TELA
+li $v0,4
+la $a0,MsgMul
+syscall
+
+# IMPRIMIR O RESULTADO NA TELA
+li $v0,1
+move $a0, $t2
+syscall
+
+li $v0, 10	# 10 É O COD. QUE A SYSCALL USA PARA ENCERRAR O PROGRAMA
+syscall		# SYSCALL CHAMA O SO PARA EXECUTAR A ACAO RELATIVA AO CODIGO QUE ESTA NO $v0
+\end{minted}
+
+\begin{itemize}
+    \item \texttt{add} realiza a operação de adição
+    \item \texttt{sub} realiza a operação de subtração
+    \item \texttt{mult} realiza a operação de multiplicação
+\end{itemize}
+Após realizar as operações especificadas, os resultados são atribuídos à registradores e seus valores são impressos na tela.
+\end{document}
