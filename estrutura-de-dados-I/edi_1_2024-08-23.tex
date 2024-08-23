@@ -1,0 +1,54 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+
+\title{Estrutura de Dados I
+\\ \large Continuação de Tipos de Dados em Java}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Tipo abstrato de dado}
+
+\subsection{Definição}
+
+\begin{quote}
+    "É algo que existe como ideia ou conceito, mas talvez não concretizado."
+\end{quote} 
+
+Eles são definidos como a aplicação da abstração sobre um conceito real ou ideia.
+
+\begin{tcolorbox}[title=Importante, colback=yellow!10!white, colframe=orange!75!black]
+Ele é baseado em um tipo de dado e:
+
+\begin{itemize}
+    \item Especifica \textbf{o que} cada operação realiza.
+    \item \textit{Não} especifica como a operação realiza sua tarefa.
+\end{itemize}
+
+\end{tcolorbox}
+
+\subsection{Benefícios dos TADs}
+
+\begin{itemize}
+    \item Encapsulamento
+    \subitem O código das operações fica (quase) oculto ao usuário.
+    \item Abstração
+    \subitem O usuário não precisa entender a implementação.
+    \item Reuso
+    \subitem Os TADs podem ser usados em  múltiplos projetos.
+    \item Segurança
+    \subitem Restringe o acesso e a manipulação direta dos dados.
+    \item Manutenção
+    \subitem A organização e abstração facilita a manutenção futura.
+    \item Padronização
+    \subitem Um TAD bem projetado segue um padrão, o que facilita a escrita de código legível e consistente.
+\end{itemize}
+
+\end{document}

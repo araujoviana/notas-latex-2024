@@ -1,0 +1,69 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Projeto e Análise de Algoritmos \\
+    Notação Assintótica}
+\author{Matheus Gabriel}
+\date{Agosto de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Crescimento de funções (CLR)}
+
+Quando um algoritmo possui entradas suficientemente grandes, focamos principalmente na ordem de crescimento do tempo de execução relevante, isso é definido como a eficiência \textbf{assintótica} dos algoritmos.
+
+As notações usadas para descrever o tempo de execução assintótico de um algoritmo são definidas em termos das funções cujos domínios são os conjunto dos números naturais $\mathbb{N} = \{0,1,2,\dots\}$.
+
+Em geral, a notação assintótica é usada para caracterizar o \textbf{tempo} de execução dos algoritmos, mas ela pode ser usada para caracterizar outros aspectos dos algoritmos, como o \textbf{espaço} usado.
+
+\section{Notação O}
+
+Para uma função \( g(n) \), denotamos por \( O(g(n)) \) o conjunto de funções \( f(n) \) que são limitadas superiormente por \( g(n) \) multiplicadas por uma constante positiva, para valores suficientemente grandes de \( n \). Formalmente, temos:
+
+\begin{align*}
+O(g(n)) &= \left\{ f(n) \mid \text{existem constantes positivas } c \text{ e } n_0 \text{ tais que} \right. \\
+&\left. 0 \leq f(n) \leq c \cdot g(n) \text{ para todo } n \geq n_0 \right\}.
+\end{align*}
+
+\section{Notação \(\Omega\)}
+
+Para uma função \( g(n) \), denotamos por \( \Omega(g(n)) \) o conjunto de funções \( f(n) \) que são limitadas inferiormente por \( g(n) \) multiplicadas por uma constante positiva, para valores suficientemente grandes de \( n \). Formalmente, temos:
+
+\begin{align*}
+\Omega(g(n)) &= \left\{ f(n) \mid \text{existem constantes positivas } c \text{ e } n_0 \text{ tais que} \right. \\
+&\left. f(n) \geq c \cdot g(n) \text{ para todo } n \geq n_0 \right\}.
+\end{align*}
+
+\section{Notação \(\Theta\)}
+
+Para uma função \( g(n) \), denotamos por \( \Theta(g(n)) \) o conjunto de funções \( f(n) \) que são limitadas superior e inferiormente por \( g(n) \) multiplicadas por constantes positivas, para valores suficientemente grandes de \( n \). Formalmente, temos:
+
+\begin{align*}
+\Theta(g(n)) &= \left\{ f(n) \mid \text{existem constantes positivas } c_1, c_2 \text{ e } n_0 \text{ tais que} \right. \\
+&\left. c_1 \cdot g(n) \leq f(n) \leq c_2 \cdot g(n) \text{ para todo } n \geq n_0 \right\}.
+\end{align*}
+
+\section{Resumindo as definições}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|l|l|l|}
+\hline
+\textbf{Notação} & \textbf{Descrição} & \textbf{Uso} & \textbf{Exemplo} \\
+\hline
+\(O(g(n))\) & Limite superior. & Descreve o pior caso. & \(f(n) = O(n^2)\) \\
+\hline
+\(\Omega(g(n))\) & Limite inferior. & Descreve o melhor caso. & \(f(n) = \Omega(n^2)\) \\
+\hline
+\(\Theta(g(n))\) & Limite exato. & Descreve o caso médio. & \(f(n) = \Theta(n^2)\) \\
+\hline
+\end{tabular}
+\end{table}
+
+\end{document}
