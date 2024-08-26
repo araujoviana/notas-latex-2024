@@ -1,0 +1,131 @@
+\documentclass{article}
+\usepackage{graphicx} % Requerido para inserção de imagens
+\usepackage{amsmath} % Requerido para fórmulas matemáticas
+\usepackage{geometry} % Para ajustar as margens
+\geometry{a4paper, margin=1in} % Margens padrão para A4
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{svg}
+
+\title{Modelagem Matemática I}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Minimizando o Custo}
+
+\subsection{Enunciado}
+Um estudante quer projetar um desjejum com flocos de milho e leite que seja o  mais econômico possível. Levando em conta o que ele consegue comer nas  suas outras refeições, ele decide que seu café da manhã deveria supri-lo com 9  gramas de proteínas, pelo menos uma terça parte da necessidade diária  recomendada (NDR) de vitamina D e pelo menos uma quarta parte da NDR de  cálcio. Ele encontra as seguintes informações nutricionais nas embalagens do  leite e dos flocos de milho:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image.png}
+\end{figure}
+
+A fim de não ter uma mistura muito empapada ou muito seca, o estudante  decide limitar-se a misturas que contenham no mínimo 1 e no máximo 3 xícaras  de flocos de milho por copo de leite. Quais quantidades de leite e de flocos de  milho ele deve utilizar para minimizar o custo de seu desjejum?
+% Inserir o enunciado do problema aqui.
+
+\subsection{Modelagem e Resolução}
+
+Definimos as variáveis de decisão como:
+\begin{itemize}
+    \item $x_1$: Quantidade de leite em copos (meia quantidade).
+    \item $x_2$: Quantidade de flocos de milho em xícaras.
+\end{itemize}
+
+Como dito no enunciado: \textquote{Quais quantidades de leite e de flocos de  milho ele deve utilizar para \textbf{minimizar o custo} de seu desjejum?}, então a função objetivo a ser minimizada é:
+\begin{equation}
+    z = 7.5x_1 + 50x_2
+\end{equation}
+
+Sujeito às seguintes restrições estabelecidas pelo enunciado:
+
+
+\begin{align*}
+    &\text{Pelo menos 9g de proteína} 
+    &\quad \Longrightarrow \quad&
+    4x_1 + 2x_2 \geq 9 \\
+    &\text{Pelo menos $\frac{1}{3}$NDR de vitamina D} 
+    &\quad \Longrightarrow \quad&
+    \frac{1}{8}x_1 + \frac{1}{10}x_2 \geq \frac{1}{3} \text{ NDR} \\
+    &\text{Pelo menos $\frac{1}{4}$NDR de Cálcio} 
+    &\quad \Longrightarrow \quad&
+    \frac{1}{6}x_1 \geq \frac{1}{4} \text{ NDR} \\
+    &\text{Pelo menos 1 xícara de flocos de milho por copo (dois meios copos) de leite} 
+    &\quad \Longrightarrow \quad&
+    \frac{x_2}{x_1} \geq \frac{1}{2} \\
+    &\text{No máximo 3 xícaras de flocos de milho por copo (dois meios copos) de leite} 
+    &\quad \Longrightarrow \quad&
+    \frac{x_2}{x_1} \leq \frac{3}{2} \\
+    &\text{Como se trata de um cenário real assumimos valores positivos} 
+    &\quad \Longrightarrow \quad&
+    x_1 \geq 0, \; x_2 \geq 0
+\end{align*}
+
+Além disso, a razão entre a quantidade de flocos de milho e a quantidade de leite deve satisfazer:
+\begin{equation}
+    1 \leq \frac{x_2}{2x_1} \leq 3
+\end{equation}
+
+
+\subsection{Encontrando a região viável}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50!black, title=Importante!]
+\textquote{A região viável é sempre a interseção de um número finito de retas e planos.}
+\end{tcolorbox}
+
+\subsubsection{Primeira Inequação}
+
+Consideramos a inequação:
+\begin{align}
+    \frac{1}{2}x_1 + \frac{1}{3}x_2 &\leq 130 \\
+    \frac{1}{2}x_1 + \frac{1}{3}x_2 &= 130
+\end{align}
+Se $x_1 = 0$, então $x_2 = 390$. \\
+Se $x_2 = 0$, então $x_1 = 260$.
+
+\subsubsection{Segunda Inequação}
+
+Consideramos a inequação:
+\begin{align}
+    \frac{1}{2}x_1 + \frac{2}{3}x_2 &\leq 170 \\
+    \frac{1}{2}x_1 + \frac{2}{3}x_2 &= 170
+\end{align}
+Se $x_1 = 0$, então $x_2 = 255$. \\
+Se $x_2 = 0$, então $x_1 = 340$.
+
+\begin{figure}[h]
+    \centering
+    \includesvg[width=\textwidth]{desmos-graph.svg}
+    \caption{Gráfico gerado a partir das duas inequações, nota-se que a região viável é onde as duas cores se sobrepoem no quadrante superior direito.}
+\end{figure}
+
+\subsection{Encontrando o Ponto de Interseção das Inequações}
+
+Consideramos as duas equações:
+\begin{align}
+    \frac{1}{2}x_1 + \frac{1}{3}x_2 &= 130 \quad \text{(I)} \\
+    \frac{1}{2}x_1 + \frac{2}{3}x_2 &= 170 \quad \text{(II)}
+\end{align}
+
+Subtraindo (I) de (II):
+\begin{align}
+    \left(\frac{1}{2}x_1 + \frac{2}{3}x_2\right) - \left(\frac{1}{2}x_1 + \frac{1}{3}x_2\right) &= 170 - 130 \\
+    \frac{2}{3}x_2 - \frac{1}{3}x_2 &= 40 \\
+    \frac{1}{3}x_2 &= 40 \\
+    \mathbf{x_2 = 120}
+\end{align}
+
+Substituindo $x_2 = 120$ em (I):
+\begin{align}
+    \frac{1}{2}x_1 + \frac{1}{3} \cdot 120 &= 130 \\
+    \frac{1}{2}x_1 + 40 &= 130 \\
+    \frac{1}{2}x_1 &= 90 \\
+    \mathbf{x_1 = 180}
+\end{align}
+
+Então o ponto de interseção se encontra em $(180x_1,120x_2)$.
+\end{document}
