@@ -1,0 +1,117 @@
+\documentclass{article}
+\usepackage{graphicx} % Requerido para inserção de imagens
+\usepackage{amsmath} % Requerido para fórmulas matemáticas
+\usepackage{geometry} % Para ajustar as margens
+\geometry{a4paper, margin=1in} % Margens padrão para A4
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{svg}
+
+\title{Modelagem Matemática I\\
+    \large Exemplo com resolução gráfica}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Exemplo}
+
+\subsection{Modelagem e Resolução}
+
+\begin{equation}
+    \mathbf{\text{Maximizar } z = 7.5x_1 + 50x_2}
+\end{equation}
+
+Sujeito às seguintes restrições:
+
+
+\begin{align*}
+\begin{cases}
+    2x_1 + x_2 \leq 8 \\
+    x_1 + 2x_2 \leq 7 \\
+    x_2 \leq 3 \\
+    x_1 \geq 0 \text{ e } x_2 \geq 0
+\end{cases}
+\end{align*}
+
+
+\subsection{Encontrando pra $x_1 = 0$ ou $x_2 = 0$}
+
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50!black, title=Importante!]
+\textquote{A região viável é sempre a interseção de um número finito de retas e planos.}
+\end{tcolorbox}
+
+\subsubsection{Primeira Inequação}
+
+Consideramos a inequação:
+\begin{equation}
+    2x_1 + x_2 = 8 \\    
+\end{equation}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        $x_1$ & $x_2$ \\
+        $0$ & $8$ \\
+        $4$ & $0$
+    \end{tabular}
+\end{table}
+Se $x_1 = 0$, então $x_2 = 8$. \\
+Se $x_2 = 0$, então $x_1 = 4$.
+
+\subsubsection{Segunda Inequação}
+
+Consideramos a inequação:
+\begin{equation}
+    x_1 + 2x_2 = 7 \\    
+\end{equation}
+\begin{table}[h]
+    \centering
+    \begin{tabular}{c|c}
+        $x_1$ & $x_2$ \\
+        $0$ & $3,5$ \\
+        $7$ & $0$
+    \end{tabular}
+\end{table}
+Se $x_1 = 0$, então $x_2 = 3,5$. \\
+Se $x_2 = 0$, então $x_1 = 7$.
+
+\subsection{Terceira inequação}
+\begin{equation}
+    x_2 \leq 3
+\end{equation}
+Essa é a mais simples, se trata de uma linha reta horizontal no 3.
+\subsection{O gráfico}
+É essencial destacar e nomear as vértices do polígono.
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=1\linewidth]{desmos-graph.png}
+\end{figure}
+
+\subsection{Encontrando o ponto ideal}
+\begin{tcolorbox}[colback=yellow!10, colframe=red!50!black, title=Importante!]
+O ponto que satisfaz a maximização é uma das vértices da região viável!
+\end{tcolorbox}
+
+\subsubsection{Definindo $x_1$ e $x_2$}
+\begin{align}
+    2x_1 + x_2 = 8 \ (-2) \\
+    x_1 + 2x_2 = 7 \\
+    \rule{2cm}{0,4pt}  \\
+    -3x_1 = -9 \\
+    x_1 = 3 \\
+    x_2 = 2
+\end{align}
+
+\subsubsection{Encontrando o ponto mais viável}
+\begin{align}
+    A = (0,0) : Z = 0 \\
+    B = (0,3) : Z = 3 \\
+    C = (1,3) : Z = 4 \\
+    \mathbf{D = (3,2) : Z = 5} \\
+    E = (4,0) : Z = 4
+\end{align}
+
+Então o ponto mais viável é o $D = (3,2)$.
+\end{document}

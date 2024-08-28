@@ -1,0 +1,57 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+\title{Projeto e Análise de Algoritmos}
+\author{Matheus Gabriel}
+\date{Agosto de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Verificando a notação O}
+
+\subsection{Exemplo 1}
+
+$2n + 10$ é $O(n)$? 
+
+Podemos realizar uma manipulação para encontrar $c$ e $n_0$:
+
+\begin{align}
+    2n + 10 &\leq c \cdot n \\
+    c \cdot n - 2n &\geq 10 \\
+    (c - 2)n &\geq 10 \\
+    n &\geq \frac{10}{c - 2}
+\end{align}
+
+A afirmação é válida para $c = 3$ e  $n_0 = 10$.
+
+\section{Paradigma divisão e conquista}
+
+Muitos algoritmos importantes são estruturalmente recursivos. Tais algoritmos seguem tipicamente o paradigma da divisão e conquista (CLR):
+\begin{itemize}
+    \item Quebram o problema original em pedaços menores.
+    \item Resolvem os subproblemas recursivamente.
+    \item Combinam estas soluções para criar uma solução para o problema original.
+\end{itemize}
+
+Então, existem 3 passos essenciais para o paradigma: 
+\begin{enumerate}
+    \item Dividir
+    \item Conquistar
+    \item Combinar
+\end{enumerate}
+
+\section{Resolvendo a Torre de Hanoi}
+Supondo três torres, E, C, D, com a torre E possui N discos.
+O objetivo é mover N discos de E para C.
+
+\begin{itemize}
+    \item Nunca colocar 1 disco maior sobre um disco menor.
+    \item Nunca mover mais que 1 disco por vez.
+\end{itemize}
+\end{document}
