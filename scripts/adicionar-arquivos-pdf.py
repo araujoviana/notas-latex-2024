@@ -23,7 +23,7 @@ mapa_secao_diretorio = {
     "Projeto e Análise de Algoritmos": "projeto-e-analise-de-algoritmos",
 }
 
-
+# FIXME: O caminho relativo ../ faz com que o script não funcione se o usuário não está em scripts/
 arquivo_html = "../index.html"
 
 # Não sei se funcionaria de um dos symlinks scr,
@@ -77,7 +77,7 @@ for base, dirs, arquivos in os.walk(diretorio_base):
 
                         # Pula linha para que cada link esteja separado
                         tag_br = arquivo_html_soup.new_tag("br")
-                        secao.insert_after(tag_br)
+                        secao.insert_after(tag_a)
                     else:
                         # Comentário ruim
                         print(
