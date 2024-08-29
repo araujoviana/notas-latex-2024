@@ -1,0 +1,38 @@
+#+title: Anotações 2° bimestre 2024
+#+DESCRIPTION: Índice responsável por expor as anotações .pdf de maneira mais acessível
+#+SETUPFILE: https://fniessen.github.io/org-html-themes/org/theme-readtheorg.setup
+#+LANGUAGE: pt-br
+
+* Introdução breve
+
+Esse repositório serve mais como um exercício de programação do que algo prático, e essa página serve apenas como um jeito fácil de acessar os documentos do [[https://github.com/araujoviana/notas-latex-2024/tree/main][repositório]]
+
+Esse arquivo foi escrito em .org e convertido para .html, o template estilo ReadTheDocs está disponível em: https://github.com/mrlee23/readtheorg
+
+* Matérias
+
+** Banco de dados
+#+BEGIN_EXPORT html
+<div class="banco-de-dados"></div>
+#+END_EXPORT
+
+** Estrutura de dados I
+
+#+BEGIN_EXPORT html
+<div class="estrutura-de-dados-I"></div>
+#+END_EXPORT
+** Modelagem Matemática I
+
+#+BEGIN_EXPORT html
+<div class="modelagem-matematica-I"></div>
+#+END_EXPORT
+** Organização de Computadores
+
+#+BEGIN_EXPORT html
+<div class="organizacao-de-computadores"></div>
+#+END_EXPORT
+** Projeto e Análise de Algoritmos
+
+#+BEGIN_EXPORT html
+<div class="projeto-e-analise-de-algoritmos"></div>
+#+END_EXPORT
