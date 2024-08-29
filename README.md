@@ -17,6 +17,9 @@ Os scripts são feitos com o Linux em mente então é possível que a manipulaç
 ./scr/*(algum script)*
 ```
 
+### Problemas 
+Alguns scripts que envolvem o uso de caminhos relativos (tipo `../index.html`) funcionam apenas de dentro diretório scripts.
+
 ## Anotações em .tex
 
 **Todas as anotações** foram realizadas no Overleaf e não foram testadas em uma instalação local. Apesar de não haver registros de erros ignorados, é possível que haja problemas de compilação. Portanto, a compilação local pode apresentar diferenças em relação ao ambiente do Overleaf.
