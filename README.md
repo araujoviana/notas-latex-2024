@@ -1,4 +1,7 @@
 # notas-latex-2024
+
+O site do repositório contém todas as anotações de maneira mais amigável (também funciona no celular): https://araujoviana.github.io/notas-latex-2024/
+
 Anotações pessoais das aulas em LaTeX de 2024, as versões em .pdf estão disponíveis.
 
 ## Scripts
