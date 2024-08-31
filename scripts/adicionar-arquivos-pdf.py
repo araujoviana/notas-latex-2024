@@ -24,7 +24,7 @@ mapa_secao_diretorio = {
 }
 
 # FIXME: O caminho relativo ../ faz com que o script não funcione se o usuário não está em scripts/
-arquivo_html = "../index.html"
+arquivo_html = "./index.html"
 
 # Não sei se funcionaria de um dos symlinks scr,
 # mas de dentro da pasta real scripts/ deve dar certo
