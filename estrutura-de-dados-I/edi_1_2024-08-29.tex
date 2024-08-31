@@ -1,0 +1,159 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+
+\title{Estrutura de Dados I
+\\ \large Pilhas}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Pilhas}
+\subsection{Introdução}
+A pilha \textbf{(stack)} é uma estrutura de dados que define o acesso de dados usando o principio LIFO:
+
+\newtcolorbox[auto counter, number within=section]{definicao}[2][]{%
+  colback=blue!5!white, colframe=blue!75!black, 
+  fonttitle=\bfseries, title=Definição~\thetcbcounter: #2, 
+  sharp corners=south, boxrule=0.8mm, arc=4mm, top=2mm, bottom=2mm, #1
+}
+
+\begin{definicao}[label={def:LIFO}]{LIFO}
+  \textbf{LIFO (Último a Entrar, Primeiro a Sair):} Um método de gerenciamento de dados onde o último elemento adicionado é o primeiro a ser removido. Comumente utilizado em estruturas de dados do tipo pilha, onde as operações são realizadas na ordem último a entrar, primeiro a sair.
+
+  \begin{itemize}
+    \item \textbf{Operação Push:} Adiciona o elemento \( x \) ao topo da pilha.
+    \item \textbf{Operação Pop:} Remove o elemento do topo da pilha, que é \( x \).
+  \end{itemize}
+\end{definicao}
+
+\subsection{Métodos comuns para pilhas}
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Método} & \textbf{Uso} & \textbf{Exemplo} \\
+\hline
+\texttt{create()} & Cria uma nova pilha & \texttt{Stack<Integer> stack = new Stack<>();} \\
+\texttt{push(E e)} & Adiciona elemento ao topo & \texttt{stack.push(10);} \\
+\texttt{pop()} & Remove e retorna o topo & \texttt{int item = stack.pop();} \\
+\texttt{peek()} & Retorna o topo sem remover & \texttt{int top = stack.peek();} \\
+\texttt{isEmpty()} & Verifica se está vazio & \texttt{boolean empty = stack.isEmpty();} \\
+\texttt{isFull()} & Verifica se está cheio & \texttt{boolean full = stack.isFull();} \\
+\texttt{size()} & Retorna o número de elementos & \texttt{int size = stack.size();} \\
+\texttt{count()} & Contagem de elementos (alternativa) & \texttt{int count = stack.count();} \\
+\texttt{clear()} & Remove todos os elementos & \texttt{stack.clear();} \\
+\hline
+\end{tabular}
+\label{tab:stack_methods}
+\end{table}
+
+\subsection{Implementação do zero}
+Essa implementação provavelmente está incompleta.
+
+\begin{minted}{java}
+// Stack.java
+public class Stack {
+    private int[] data;
+    private int count;
+
+    // Construtor para inicializar a pilha com um tamanho específico
+    public Stack(int size) {
+        data = new int[size];
+        count = 0;
+    }
+
+    // Adiciona um elemento ao topo da pilha
+    public void push(int value) {
+        if (count == data.length) {
+            System.out.println("Erro: pilha cheia.");
+            return;
+        }
+        data[count++] = value;
+    }
+
+    // Remove e retorna o elemento do topo da pilha
+    public int pop() {
+        if (isEmpty()) {
+            System.out.println("Erro: pilha vazia.");
+            throw new RuntimeException("Pilha vazia");
+        }
+        return data[--count];
+    }
+
+    // Retorna o elemento do topo da pilha sem removê-lo
+    public int peek() {
+        if (isEmpty()) {
+            System.out.println("Erro: pilha vazia.");
+            throw new RuntimeException("Pilha vazia");
+        }
+        return data[count - 1];
+    }
+
+    // Verifica se a pilha está vazia
+    public boolean isEmpty() {
+        return count == 0;
+    }
+
+    // Retorna o número de elementos na pilha
+    public int size() {
+        return count;
+    }
+
+    // Remove todos os elementos da pilha
+    public void clear() {
+        count = 0;
+    }
+
+    // Representa a pilha como uma string
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder("Pilha: [");
+        for (int i = 0; i < count; i++) {
+            sb.append(data[i]);
+            if (i < count - 1) {
+                sb.append(", ");
+            }
+        }
+        sb.append("]");
+        return sb.toString();
+    }
+
+    // Método principal para teste
+    public static void main(String[] args) {
+        Stack stack = new Stack(5);
+        
+        // Adiciona elementos à pilha
+        stack.push(1);
+        stack.push(2);
+        stack.push(3);
+
+        // Exibe a pilha
+        System.out.println(stack);
+
+        // Exibe o topo da pilha
+        System.out.println("Topo da pilha: " + stack.peek());
+
+        // Remove e exibe elementos da pilha
+        while (!stack.isEmpty()) {
+            System.out.println("Removido: " + stack.pop());
+        }
+
+        // Exibe se a pilha está vazia
+        System.out.println("A pilha está vazia? " + stack.isEmpty());
+
+        // Exibe a pilha após limpar
+        stack.clear();
+        System.out.println(stack);
+    }
+}
+
+\end{minted}
+\end{document}

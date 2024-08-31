@@ -1,0 +1,153 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}
+\usepackage{fancyvrb}
+
+\title{Organização de Computadores \\
+    \large Microcontroladores MIPS}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Introdução}
+
+\begin{tcolorbox}[colback=blue!10, colframe=blue!80, title=Seção menos importante, fonttitle=\bfseries]
+    Pode pular essa seção...
+\end{tcolorbox}
+
+\subsection{Definição de microcontrolador}
+
+É um circuito integrado que reúne em seu interior um
+microprocessador, memórias (voláteis e não voláteis),
+temporizadores, conversor A/D, diversas portas para E/S,
+requerendo apenas uma fonte de alimentação externa para
+funcionar.
+
+\subsection{Aplicações}
+
+\begin{itemize}
+    \item Automação industrial
+    \item Indústria automotiva
+    \item Eletrodomésticos
+    \item Produtos eletrônicos
+    \item Impressoras, mouses e teclados
+    \item Etc...
+\end{itemize}
+
+\clearpage
+
+\section{MIPS}
+\subsection{Especificidades}
+\subsubsection{Uso}
+Essa arquitetura \textbf{RISC} está presente em sistemas como:
+\begin{itemize}
+    \item Video Games
+    \item Roteadores da Cisco
+    \item Impressoras
+    \item Etc...
+\end{itemize}
+
+\subsubsection{Instruções}
+As instruções possuem tamanho fixo \textbf{32 ou 64 bits}, e são mais fáceis de manipular, especialmente pelo \textit{pipeline}.
+
+\begin{tcolorbox}[colback=orange!10, colframe=orange!80, title=Interessante, fonttitle=\bfseries]
+    Na arquitetura x86 as instruções não tem tamanho fixo.
+\end{tcolorbox}
+
+As instruções seguem o seguinte padrão:
+
+\begin{minted}[linenos]{asm}
+# OPERAÇÃO <lista de operandos>
+add $s1, $s2, $s3    
+\end{minted}
+
+\subsubsection{Registradores}
+Registradores são pequenas memórias temporárias localizadas dentro da 
+própria CPU, capazes de armazenar alguns bits.
+
+A quantidade de bits depende da arquitetura, no caso do MIPS os registradores têm \textbf{32 bits}. 
+
+MIPS possui 32 registradores de uso geral, numerados de 0 a 31, sendo geralmente referenciados pelo seu nome. Exemplo: \mintinline{asm}{$t0, $s2}, etc.
+
+Seguir as convenções do uso de registradores seguida por programadores e
+compiladores ajuda na compatibilidade entre outros microcontroladores MIPS.
+
+\clearpage
+
+\subsection{Convenção dos Registradores do MIPS}
+
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|c|c|l|}
+\hline
+\textbf{Nome} & \textbf{Número} & \textbf{Uso} \\ \hline
+\mintinline{asm}{$zero} & 0 & Valor constante 0 \\ \hline
+\mintinline{asm}{$at}   & 1 & Registrador temporário reservado para o assembler \\ \hline
+\mintinline{asm}{$v0}   & 2 & Registrador para resultados de chamadas de sistema e funções \\ \hline
+\mintinline{asm}{$v1}   & 3 & Registrador para resultados de chamadas de sistema e funções \\ \hline
+\mintinline{asm}{$a0}   & 4 & Argumento 0 \\ \hline
+\mintinline{asm}{$a1}   & 5 & Argumento 1 \\ \hline
+\mintinline{asm}{$a2}   & 6 & Argumento 2 \\ \hline
+\mintinline{asm}{$a3}   & 7 & Argumento 3 \\ \hline
+\mintinline{asm}{$t0}   & 8 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t1}   & 9 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t2}   & 10 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t3}   & 11 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t4}   & 12 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t5}   & 13 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t6}   & 14 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t7}   & 15 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$s0}   & 16 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s1}   & 17 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s2}   & 18 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s3}   & 19 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s4}   & 20 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s5}   & 21 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s6}   & 22 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$s7}   & 23 & Registrador salvo (preservado) \\ \hline
+\mintinline{asm}{$t8}   & 24 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$t9}   & 25 & Registrador temporário (não preservado) \\ \hline
+\mintinline{asm}{$k0}   & 26 & Registrador reservado para o kernel \\ \hline
+\mintinline{asm}{$k1}   & 27 & Registrador reservado para o kernel \\ \hline
+\mintinline{asm}{$gp}   & 28 & Registrador do ponteiro global \\ \hline
+\mintinline{asm}{$sp}   & 29 & Registrador do ponteiro da pilha \\ \hline
+\mintinline{asm}{$fp}   & 30 & Registrador do ponteiro de quadro \\ \hline
+\mintinline{asm}{$ra}   & 31 & Registrador de retorno da função \\ \hline
+\end{tabular}
+\end{table}
+
+\clearpage
+
+\subsection{Instruções Aritméticas}
+
+Cada instrução no MIPS executa uma única operação. Sempre que escrevemos instruções, manipulamos registradores para armazenar dados. 
+
+As instruções no MIPS possuem dois operandos e um destino para guardar o resultado. 
+
+Por exemplo: \mintinline{asm}{operação $resultado, $operando1, $operando2}.
+
+\begin{table}[h!]
+\centering
+\begin{tabular}{|l|l|l|}
+\hline
+\textbf{Sintaxe} & \textbf{Nome} & \textbf{O que faz} \\ \hline
+\mintinline{asm}{add $d, $s, $t} & ADD & Soma \$s e \$t, resultado em \$d. \\ \hline
+\mintinline{asm}{sub $d, $s, $t} & SUB & Subtrai \$t de \$s, resultado em \$d. \\ \hline
+\mintinline{asm}{mul $d, $s, $t} & MUL & Multiplica \$s e \$t, resultado em \$d. \\ \hline
+\mintinline{asm}{div $s, $t} & DIV & Divide \$s por \$t. Quociente em \$lo, resto em \$hi. \\ \hline
+\mintinline{asm}{addi $t, $s, imm} & ADDI & Soma \$s e imediato, resultado em \$t. \\ \hline
+\mintinline{asm}{subi $t, $s, imm} & SUBI & Subtrai imediato de \$s, resultado em \$t. \\ \hline
+\mintinline{asm}{muli $t, $s, imm} & MULI & Multiplica \$s por imediato, resultado em \$t. \\ \hline
+\mintinline{asm}{divi $s, $t, imm} & DIVI & Divide \$s por imediato. Quociente em \$lo, resto em \$hi. \\ \hline
+\end{tabular}
+\end{table}
+
+\end{document}

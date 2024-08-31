@@ -1,0 +1,306 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+\title{Projeto e Análise de Algoritmos \\
+\large Algoritmos de Ordenação}
+\author{Matheus Gabriel}
+\date{Agosto de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Merge Sort}
+\subsection{Explicação}
+O Merge Sort é um algoritmo de ordenação baseado na técnica de \textbf{divisão e conquista}. O algoritmo segue os seguintes passos:
+
+\begin{enumerate}
+    \item \textbf{Divisão:} Divide o array (ou lista) em duas metades.
+    \item \textbf{Conquista:} Ordena cada metade recursivamente.
+    \item \textbf{Combinação:} Mescla as duas metades ordenadas para produzir o array ordenado final.
+\end{enumerate}
+
+A eficiência do Merge Sort é garantida pela sua abordagem recursiva e pela técnica de mesclagem, que resulta numa complexidade de tempo de \(\Theta(n \log n)\) tanto no pior caso quanto no melhor caso. Especificamente, a complexidade no pior caso é \(\Omega(n \log n)\), o que significa que o Merge Sort é garantidamente eficiente na ordenação de qualquer conjunto de dados.
+
+\subsection{Exemplo visual}
+
+\begin{minipage}{\textwidth}
+    \includegraphics[width=0.5\linewidth]{image.png}
+\end{minipage}
+Passos do Merge Sort. Fonte: \href{https://www.programiz.com/dsa/merge-sort}{Programiz}.
+
+
+\subsection{Código em C}
+\subsubsection{Implementação}
+\begin{minted}{c}
+#include <stdio.h>
+#include <stdlib.h>
+
+void merge(int arr[], int l, int m, int r) {
+    int n1 = m - l + 1;
+    int n2 = r - m;
+
+    int* L = (int*)malloc(n1 * sizeof(int));
+    int* R = (int*)malloc(n2 * sizeof(int));
+
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[m + 1 + j];
+
+    int i = 0, j = 0, k = l;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k++] = L[i++];
+        } else {
+            arr[k++] = R[j++];
+        }
+    }
+
+    while (i < n1) {
+        arr[k++] = L[i++];
+    }
+
+    while (j < n2) {
+        arr[k++] = R[j++];
+    }
+
+    free(L);
+    free(R);
+}
+
+void mergeSort(int arr[], int l, int r) {
+    if (l < r) {
+        int m = l + (r - l) / 2;
+        mergeSort(arr, l, m);
+        mergeSort(arr, m + 1, r);
+        merge(arr, l, m, r);
+    }
+}
+
+void printArray(int arr[], int size) {
+    for (int i = 0; i < size; i++)
+        printf("%d ", arr[i]);
+    printf("\n");
+}
+
+int main() {
+    int arr[] = {12, 11, 13, 5, 6, 7};
+    int arr_size = sizeof(arr) / sizeof(arr[0]);
+
+    printf("Array original:\n");
+    printArray(arr, arr_size);
+
+    mergeSort(arr, 0, arr_size - 1);
+
+    printf("\nArray ordenado:\n");
+    printArray(arr, arr_size);
+    return 0;
+}
+\end{minted}
+
+\subsection{Código em Common Lisp}
+\subsubsection{Implementação}
+\begin{minted}{lisp}
+(defun merge (left right)
+  (cond
+    ((null left) right)
+    ((null right) left)
+    ((<= (car left) (car right))
+     (cons (car left) (merge (cdr left) right)))
+    (t (cons (car right) (merge left (cdr right))))))
+
+(defun merge-sort (list)
+  (if (or (null list) (null (cdr list)))
+      list
+      (let* ((mid (/ (length list) 2))
+             (left (subseq list 0 mid))
+             (right (subseq list mid)))
+        (merge (merge-sort left) (merge-sort right)))))
+
+;; Exemplo de uso
+(let ((unsorted-list '(12 11 13 5 6 7)))
+  (format t "Lista original: ~a~%" unsorted-list)
+  (format t "Lista ordenada: ~a~%" (merge-sort unsorted-list)))
+\end{minted}
+
+\section{Encontrando a fórmula fechada}
+\begin{tcolorbox}[
+  colback=yellow!10!white, 
+  colframe=red!75!black,  
+  fonttitle=\bfseries,     
+  coltitle=black,         
+  sharp corners=south,     
+  boxrule=1mm,             
+  title=Seção Importante,  
+  width=\textwidth         
+]
+  Essa é uma das partes mais importantes da matéria!
+\end{tcolorbox}
+\subsection{Primeiro Exemplo (Mais explicativo)}
+
+Vamos resolver a recorrência dada por:
+
+\begin{align*}
+    T(n) &= 2T\left(\frac{n}{2}\right) + \Theta(n) \\
+    T(n) &= 2T\left(\frac{n}{2}\right) + n \\
+    T(1) &= 1
+\end{align*}
+
+\textbf{Solução da Recorrência}
+
+Para resolver a recorrência \(T(n) = 2T\left(\frac{n}{2}\right) + n\), utilizaremos o método de expansão:
+
+1. \textbf{Expandindo a Recorrência:}
+
+   Começamos substituindo \(T\left(\frac{n}{2}\right)\) na expressão de \(T(n)\):
+
+   \begin{align*}
+       T\left(\frac{n}{2}\right) &= 2T\left(\frac{n}{4}\right) + \frac{n}{2} \\
+       T(n) &= 2 \left[2T\left(\frac{n}{4}\right) + \frac{n}{2}\right] + n \\
+       T(n) &= 2^2T\left(\frac{n}{4}\right) + 2 \cdot \frac{n}{2} + n \\
+       T(n) &= 2^2T\left(\frac{n}{4}\right) + n + n
+   \end{align*}
+
+   Continuamos expandindo para o próximo nível:
+
+   \begin{align*}
+       T\left(\frac{n}{4}\right) &= 2T\left(\frac{n}{8}\right) + \frac{n}{4} \\
+       T(n) &= 2^2 \left[2T\left(\frac{n}{8}\right) + \frac{n}{4}\right] + n + n \\
+       T(n) &= 2^3T\left(\frac{n}{8}\right) + 2^2 \cdot \frac{n}{4} + n + n \\
+       T(n) &= 2^3T\left(\frac{n}{8}\right) + n + n + n
+   \end{align*}
+
+2. \textbf{Generalizando:}
+
+   Observamos que após \(i\) expansões, temos:
+
+   \begin{align*}
+       T(n) &= 2^i T\left(\frac{n}{2^i}\right) + \sum_{k=0}^{i-1} 2^k \cdot \frac{n}{2^k}
+   \end{align*}
+
+   O somatório pode ser simplificado para:
+
+   \begin{align*}
+       \sum_{k=0}^{i-1} n &= n \cdot i
+   \end{align*}
+
+   Então:
+
+   \begin{align*}
+       T(n) &= 2^i T\left(\frac{n}{2^i}\right) + n \cdot i
+   \end{align*}
+
+3. \textbf{Determinação do Valor de \(i\):}
+
+   A recursão termina quando \( \frac{n}{2^i} = 1 \), ou seja:
+
+   \begin{align*}
+       \frac{n}{2^i} &= 1 \\
+       2^i &= n \\
+       i &= \log_2 n
+   \end{align*}
+
+4. \textbf{Substituindo \(i\) na Fórmula Geral:}
+
+   Quando \( i = \log_2 n \), temos:
+
+   \begin{align*}
+       T(n) &= 2^{\log_2 n} T(1) + n \cdot \log_2 n \\
+       T(n) &= n \cdot 1 + n \cdot \log_2 n \\
+       T(n) &= n + n \log_2 n
+   \end{align*}
+
+5. \textbf{Complexidade Assintótica:}
+
+   Combinando os termos, obtemos:
+
+   \begin{align*}
+       T(n) &= \Theta(n \log_2 n)
+   \end{align*}
+
+Portanto, a fórmula fechada para a recorrência é:
+
+\begin{align*}
+    \boxed{T(n) = \Theta(n \log n)}
+\end{align*}
+
+\subsection{Segundo Exemplo}
+
+Vamos resolver a seguinte recorrência:
+
+\begin{align*}
+    T(n) &= T\left(\frac{n}{2}\right) + 1 \\
+    \text{com } T(1) &= 1
+\end{align*}
+
+\textbf{Solução da Recorrência}
+
+Para resolver a recorrência \(T(n) = T\left(\frac{n}{2}\right) + 1\), utilizaremos o método de expansão:
+
+1. \textbf{Expandindo a Recorrência:}
+
+   Começamos substituindo \(T\left(\frac{n}{2}\right)\) na expressão de \(T(n)\):
+
+   \begin{align*}
+       T\left(\frac{n}{2}\right) &= T\left(\frac{n}{2^2}\right) + 1 \\
+       T(n) &= T\left(\frac{n}{2^2}\right) + 1 + 1 \\
+       T(n) &= T\left(\frac{n}{2^2}\right) + 2
+   \end{align*}
+
+   Continuamos expandindo para o próximo nível:
+
+   \begin{align*}
+       T\left(\frac{n}{2^2}\right) &= T\left(\frac{n}{2^3}\right) + 1 \\
+       T(n) &= T\left(\frac{n}{2^3}\right) + 1 + 1 + 1 \\
+       T(n) &= T\left(\frac{n}{2^3}\right) + 3
+   \end{align*}
+
+2. \textbf{Generalizando:}
+
+   Observamos que após \(i\) expansões, temos:
+
+   \begin{align*}
+       T(n) &= T\left(\frac{n}{2^i}\right) + i
+   \end{align*}
+
+   A recursão termina quando \( \frac{n}{2^i} = 1 \), ou seja:
+
+   \begin{align*}
+       \frac{n}{2^i} &= 1 \\
+       2^i &= n \\
+       i &= \log_2 n
+   \end{align*}
+
+3. \textbf{Substituindo \(i\) na Fórmula Geral:}
+
+   Quando \( i = \log_2 n \), temos:
+
+   \begin{align*}
+       T(n) &= T(1) + \log_2 n \\
+       T(n) &= 1 + \log_2 n
+   \end{align*}
+
+4. \textbf{Complexidade Assintótica:}
+
+   O termo constante \(1\) pode ser desconsiderado na notação assintótica, então obtemos:
+
+   \begin{align*}
+       T(n) &= \Theta(\log n)
+   \end{align*}
+
+Portanto, a fórmula fechada para a recorrência é:
+
+\begin{align*}
+    \boxed{T(n) = \Theta(\log n)}
+\end{align*}
+
+\end{document}
