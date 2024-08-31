@@ -77,7 +77,7 @@ for base, dirs, arquivos in os.walk(diretorio_base):
 
                         # Pula linha para que cada link esteja separado
                         tag_br = arquivo_html_soup.new_tag("br")
-                        secao.insert_after(tag_a)
+                        secao.insert_after(tag_br)
                     else:
                         # Comentário ruim
                         print(
