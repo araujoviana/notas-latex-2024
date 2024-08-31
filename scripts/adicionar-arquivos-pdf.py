@@ -28,7 +28,7 @@ arquivo_html = "./index.html"
 
 # Não sei se funcionaria de um dos symlinks scr,
 # mas de dentro da pasta real scripts/ deve dar certo
-diretorio_base = "../"
+diretorio_base = "."
 
 print("Começando...")
 
