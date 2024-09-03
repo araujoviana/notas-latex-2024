@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{graphicx} % Requerido para inserção de imagens
+\usepackage{amsmath} % Requerido para fórmulas matemáticas
+\usepackage{geometry} % Para ajustar as margens
+\geometry{a4paper, margin=1in} % Margens padrão para A4
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{svg}
+\usepackage{xcolor}
+
+
+\title{Modelagem Matemática I\\
+    \large Método Simplex}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Etapas}
+
+\subsection{Enunciado}
+
+Uma marcenaria produz dois produtos: mesa e armário. Para  produzir uma mesa são gastos 2 m2 de madeira e 2 h de mão de obra e para produzir um armário são gastos 3 m2 de madeira e 1 h de mão de obra. Sabendo que a disponibilidade de	madeira é de 12 m2 e a disponibilidade de mão de obra é de 8 h. Determinar quanto deve ser  produzido de cada um dos produtos para maximizar a margem de contribuição total (lucro) da empresa, sabendo que cada mesa vendida a margem é de R\$ 4,00 e que cada armário vendido fornece uma margem de  R\$ 1,00.
+
+\subsection{Modelo}
+Modelo:
+Variáveis de decisão: 
+$x_1$ representa a quantidade de mesas a produzir;
+$x_2$ representa a quantidade de armários a produzir;
+
+\begin{align*}
+    \text{Maximizar } L =4x_1 + x_2
+\end{align*}
+
+\subsection{Passo 1}
+Para cada restrição tipo $\leq$ inserir uma variável de folga. 
+
+Assim:
+
+\begin{itemize}
+    \item $x_3$ representa a folga (ou sobra) de madeira
+    \item $x_4$ representa a folga (ou a sobra) de horas de mão de obra.
+\end{itemize}
+
+\subsection{Passo 2}
+Reescrevemos o modelo com as variáveis de folga:
+
+\begin{align*}
+    \text{Maximizar }L = 4x_1 + 1x_2 + 0x_3 + 0x_4 \\
+\end{align*}
+Sujeito a
+\begin{align*}
+    2x_1 + 3x_2 + 1x_3 + 0x_4 = 12 \\
+    2x_1 + 1x_2 + 0x_3 + x_4 = 8 \\
+    x_1;x_2;x_3;x_4 \geq 0
+\end{align*}
+\subsection{Passo 3}
+Para obtermos a \textbf{solução inicial}, consideramos que nada foi produzido ainda, ou seja, as variáveis de decisão são nulas e, portanto, as variáveis de folga são os valores totais dos recursos (madeira e mão de obra). De modo que o lucro inicial é nulo.
+
+Assim:
+\begin{align*}
+x_1 &= 0 \\
+x_2 &= 0 \quad \text{variáveis não-básicas} \\
+x_3 &= 12, \quad x_4 = 8 \quad \text{variáveis básicas} \\
+L &= 0
+\end{align*}
+
+Ou seja: 
+\[
+S_0 = (x_1, x_2, x_3, x_4; L) = (0, 0, 12, 8; 0)
+\]
+
+\subsection{Passo 4}
+Escrever o quadro Simplex com a solução inicial, invertendo os sinais dos coeficientes da função objetivo:
+
+\begin{tcolorbox}[
+  colback=yellow!10!white, 
+  colframe=yellow!75!black,  
+  fonttitle=\bfseries,     
+  coltitle=black,         
+  sharp corners=south,     
+  boxrule=1mm,             
+  title=Aviso,  
+  width=\textwidth         
+]
+As imagens usadas nessas etapas estão no \texttt{.pptx} do professor, nesse e em outros documentos incluo apenas o resultado final.
+\end{tcolorbox}
+
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{final.png}
+\end{figure}
+
+\textit{Essa tabela vai ser usada ao longo de todo desse exercício específico, consulte ela.}
+
+\subsection{Passo 5}
+Vamos obter uma nova solução:
+
+\begin{itemize}
+    \item Colocamos na base a variável com o lucro mais negativo. \textbf{De modo que $x_1$ entra na base}.
+    \item Se alguma variável entra na base, alguma tem que sair, pois só há 2 lugares na base.
+    \item A variável que sai da base é a com menor $\frac{b}{x_i}$ , onde $x_i$ é a coluna da variável que está entrando na base.
+    \item \textbf{Logo, $x_4$ sai da base}.
+\end{itemize}
+
+\textit{Consulte a imagem do passo 4.}
+
+\subsection{Passo 6}
+Vamos montar o quadro Simplex com $x_1$ no lugar de $x_4$:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{sadafewg.png}
+\end{figure}
+
+Para	obtermos	a	nova	solução	devemos	usar	as	3 operações elementares de matrizes:
+\begin{enumerate}
+    \item Trocamos 2 linhas de posição
+    \item Multiplicamos	uma	linha	por	um	número	real	diferente	de  zero
+    \item Substituímos uma linha pela soma dela com um múltiplo de outra linha
+\end{enumerate}
+
+
+\subsection{Passo 7}
+
+Usando a primeira operação vamos colocar a linha pivô na primeira linha:
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{egweargherer.png}
+\end{figure}
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=0.5\linewidth]{esgewsgergh.png}
+\end{figure}
+Para obtermos uma nova solução, a coluna da variável pivô deve  mudar para ficar $1$ onde $x_1$ cruza com $x_1$, e 0 em todas as outras  linhas.
+\subsection{Passo 8}
+O pivô deve ser igual a 1, então vamos dividir a primeira  linha por 2, usando a segunda operação elementar:
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{afesgsw.png}
+\end{figure}
+
+\subsection{Passo 9}
+Para arrumar as outras linhas, devemos lembrar que os  valores, que não o pivô, devem ser zero na coluna pivô. Assim, para  que isso ocorra, devemos trocar a linha 2 por ela menos 2 vezes a linha  pivô e, trocar a terceira linha por ela mais 4 vezes a linha pivô, ou seja:
+
+\begin{equation}
+    L_2 \leftrightarrow L_2 - 2L_1
+\end{equation}
+
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{gherthrt.png}
+\end{figure}
+
+Obtemos uma nova solução, pois todas as colunas das variáveis básicas  estão na forma correta, isto é, valem 1 onde a linha da variável cruza com  a sua coluna, e zero nas outras posições.
+
+\begin{equation}
+S_1 = (x_1, x_2, x_3, x_4; L) = (4, 0, 4, 0; 16)    
+\end{equation}
+
+Como não há mais valores negativos na linha “L”, a solução é a solução  ótima.
+
+Se após acharmos uma solução, ainda houver valores negativos na linha  “L”, devemos obter nova solução, voltando ao passo 5. Fazemos isso  iterativamente até que não haja mais valores negativos na linha do lucro.
+\end{document}
