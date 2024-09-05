@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}
+\usepackage{fancyvrb}
+
+\title{Organização de Computadores \\
+    \large Conjunto de Instruções MIPS}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Tipos de dados}
+
+\begin{itemize}
+    \item \textbf{byte}: Define um dado como 1 byte (8 bits)
+    \item \textbf{double}: Número de ponto flutuante de 64 bits
+    \item \textbf{float}: Número de ponto flutuante de 32 bits
+    \item \textbf{half}: Define um dado de 2 bytes (16 bits)
+    \item \textbf{word}: int de 4 bytes
+    \item \textbf{space x}: Reserva x bytes em memória (Data Segment)
+\end{itemize}
+
+\section{Tipos de instruções no MIPS}
+No MIPS existem três categorias de instruções: 
+
+\begin{itemize}
+    \item \textbf{TIPO R}: (Formato para \textbf{R}egistradores): Maioria das instruções aritméticas e lógicas.
+    \item \textbf{TIPO I}: (Aritmética \textbf{I}mediata): Instruções de transferência de dados, desvios condicionais (branch) e operações imediatas.
+    \item \textbf{TIPO J}: (Operações de Jump/Deslocamento): Instruções de desvios incondicionais.
+\end{itemize}
+
+
+\section{Convertendo um código Assembly para código de máquina}
+
+\begin{table}[]
+    \centering
+    \begin{tabular}{|c |c| c| c| c| c|}
+        op & rs & rd & rt & shamt & funct \\
+        6 bits & 5 bits & 5 bits & 5 bits & 5 bits & 6 bits
+    \end{tabular}
+\end{table}
+
+\subsection{Exemplo}
+
+Convertemos transformando os bits em binário:
+\begin{enumerate}
+    
+    \item add \$t0, \$s0, \$s1 (add rd,rs,rt)
+    \item 000000 10000 10001 01000 00000 100000
+    \item 0x02114020
+\end{enumerate}
+A representação binária é dividida em grupos de 4, e convertida para hexadecimal.
+\end{document}
