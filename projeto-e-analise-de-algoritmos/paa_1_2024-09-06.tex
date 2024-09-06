@@ -1,0 +1,124 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\newcommand{\lp}{\Bigl(}
+\newcommand{\rp}{\Bigr)}
+\title{Projeto e Análise de Algoritmos \\
+\large Resolvendo Problemas de Algoritmos de Ordenação}
+\author{Matheus Gabriel}
+\date{Agosto de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Primeiro problema}
+
+\subsection{Enunciado}
+\subsubsection{Contexto}
+Professor Rubião afirma ter encontrado uma versão assintoticamente melhor que a versão original. Na versão de Rubião \textit{merge sort} \textbf{divide} o vetor em 3 partes e chama recursivamente merge sort para cada uma destas partes. Finalmente é chamado uma versão modificada do subalgoritmo merge para intercalar o resultado destas 3 chamadas.
+
+Sua tarefa é verificar se Prof Rubião realmente melhorou merge sort assintoticamente.
+
+\subsubsection{Exemplo}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c | c | c }
+        msort & 1 & 2 & 3 \\
+        msort & 1 & -- & -- \\
+        msort & -- & 2  & -- \\
+        msort & -- & -- & 3 \\
+        merge' & -- & -- & -- \\
+
+
+    \end{tabular}
+\end{table}
+
+\subsection{Como fazer}
+Para resolver, você deve:
+\begin{enumerate}
+    \item Achar a fórmula aberta para o algorítmo do Prof. Rubião
+    \item Encontrar a fórmula fechada desta fórmula aberta.
+    \item Comparar este resultado com $T(n) = \Theta (n \lg n)$ que é a fórmula fechada do merge sort original.
+\end{enumerate}
+
+\subsection{Resolução}
+
+\subsubsection{Achando a fórmula aberta}
+Note a análise na seção exemplo, lembre-se que $T(n)$ é o \textbf{T}empo necessário para resolver o algorítmo de tamanho \textbf{n}
+\begin{align*}
+    T(1) = 1 \\
+    T(n) = 3\cdot T(\frac{n}{3}) + n
+\end{align*}
+
+\subsubsection{Encontrando a fórmula fechada}
+
+\begin{align*}
+    T(n) = 3T\Bigl(\frac{n}{3}\Bigr) + n \\
+    \text{Mas }T\Bigl( \frac{n}{3^2}\Bigr)+\frac{n}{3} \\
+    \therefore T(n) = 3\Bigl(3T\Bigl(\frac{n}{3^2}\Bigr)+\frac{n}{3}\Bigr) + n \\
+    T(n) = 3^2 T\Bigl(\frac{n}{3}\Bigr)+n+n \\
+    \text{Mas }T\Bigl( \frac{n}{3^2}\Bigr) = 3\cdot T \Bigl( \frac{n}{3^3}\Bigr) + \frac{n}{3^2} \\
+    \therefore T(n) = 3^2\Bigl(3T\Bigl(\frac{n}{3^3}\Bigr) + \frac{n}{3^2}\Bigr) + n + n \\
+    T(n) = 3^3T\Bigl(\frac{n}{3^3}\Bigr) + n + n + n
+\end{align*}
+
+Generalizando, temos: 
+
+\begin{align*}
+    T(n) = 3^i T\Bigl(\frac{n}{3^i}\Bigr) + \sum^i_{k= 1}n
+\end{align*}
+
+e vai parar quando $\frac{n}{3^i} = 1 \longrightarrow \boxed{i = \log_3 n}$
+
+\begin{align*}
+    \therefore T(n) = 3^{\log_3 n}[T(1) \rightarrow 1] + \sum^{\log_3 n}_{k = 1} n \\
+    T(n) = n^{\log_3 3} + n \log_3 n = n + n \log_3 n \\
+    \therefore T(n) = \Theta (n \log_3 n) = \boxed{\Theta (n \lg n)}
+\end{align*}
+
+\subsubsection{Comparando com merge sort normal}
+
+Não houve melhoria \textit{assintótica}, portanto não vale a pena atualizar o merge sort.
+
+\section{Segundo problema}
+\subsection{Enunciado}
+Encontre a fórmula fechada para:
+\begin{align*}
+    T(n) = 2T\Bigl(\frac{n}{2}\Bigr)+n^2
+\end{align*}
+\subsection{Resolução}
+
+Consulte a fórmula: $\sum^n_{k=0}{c^k} = \frac{c^{n+1} - 1 }{c - 1}$
+\begin{align*}
+    T(n) = 2T\Bigl(\frac{n}{2}\Bigr)+n^2 \\
+    \text{Mas }T\Bigl(\frac{n}{2}\Bigr) = 2T\Bigl(\frac{n}{2^2}\Bigr) + \frac{n^2}{2^2} \\
+    \therefore T(n) = 2\Bigl(2T\Bigl(\frac{n}{2^2}\Bigr) + \frac{n^2}{2^2} \Bigr) + n^2 \\
+    T(n) = 2^2 T\Bigl( \frac{n}{2^2}\Bigr) + \frac{n^2}{2} + n^2 \\
+    \text{Mas } T\Bigl(\frac{n}{2^2}\Bigr) = 2T\Bigl(\frac{n}{2^3}\rp + \frac{n^2}{2^4} \\
+    \therefore T(n) = 2^2\lp 2T \lp \frac{n}{2^3} \rp + \frac{n^2}{2} + n^2 \rp\\
+    T(n) = 2^3T \lp \frac{n}{2^3} \rp + \frac{n^2}{2^2} + \frac{n^2}{2^1} + \frac{n^2}{2^0}
+\end{align*}
+
+Generalizando, temos:
+
+\begin{align*}
+    T(n) = 2^i T\lp \frac{n}{2^i}\rp + n^2 \sum^{i-1}_{k=0}{\lp \frac{1}{2}\rp^k} \\
+    \text{e vai parar quando } \frac{n}{2^i} = 1 \\
+    \text{ou } \boxed{i = \log_2 n = \lg n} \\
+    \therefore T(n) = 2^{\log_2 n} [T(1) \rightarrow 1] + n^2 \sum^{\log_2 n = 1}_{k = 0}\lp \frac{1}{2} \rp^k \\
+    T(n) = n^{\log_2 2} + n^2 \lp \frac{\lp \frac{1}{2} \rp^{\log_2 n} - 1}{\frac{1}{2} - 1} \rp =  \\
+    = n + n^2 \lp \frac{n^{\log_2 \frac{1}{2}} - 1}{-\frac{1}{2}}\rp = n + n^2 \lp \frac{n^{-1} - 1}{-\frac{1}{2}}\rp \\
+    \dots \\
+    \therefore \boxed{T(n) = \Theta(n^2)}
+\end{align*}
+Faltou completar os cálculos na aula.
+\end{document}
