@@ -1,0 +1,142 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\newcommand{\lp}{\Bigl(}
+\newcommand{\rp}{\Bigr)}
+\title{Projeto e Análise de Algoritmos \\
+\large Teorema Mestre E Mais Problemas Com Recursão}
+\author{Matheus Gabriel}
+\date{Agosto de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Problema com recorrência}
+\subsection{Enunciado}
+Resolver: 
+\begin{align*}
+\begin{cases}
+T(n) = 8T(\frac{n}{2}) + n \\
+T(1) = 1
+\end{cases}
+\end{align*}
+
+\subsection{Resolução}
+\begin{align*}
+    \text{Mas }T(\frac{n}{2}) = 8T(\frac{n}{2^2}) + \frac{n}{2} \\
+    \therefore T(n) =  8(8T(\frac{n}{2^2})+\frac{n}{2}) + n \\
+    T(n) = 8^2 T(\frac{n}{2^2}) + 4n + n \\
+    \text{Mas } T(\frac{n}{2^2}) = 8T(\frac{n}{2^3}) + \frac{n}{2^2} \\
+    \therefore T(n) = 8^2(8T(\frac{n}{2^3}) + \frac{n}{2^2}) + 4n + n \\
+    T(n) = 8^3T(\frac{n}{2^3}) + 16n + 4n + n \\
+    T(n) = 8^3(\frac{n}{2^3}) + n (4^2+4^1+4^0) \\
+\end{align*}
+Generalizando, temos:
+\begin{align*}
+    T(n) = 8^i T(\frac{n}{2^i}) + n\sum^{i-1}_{k=0}4^k
+\end{align*}
+E vai parar quando 
+\begin{align*}
+    \frac{n}{2^i} = 1 \\
+    \text{ou}\\
+    \boxed{i = \log_2 n}
+\end{align*}
+Tendo em mente que $\boxed{\sum^n_{k=0}c^k=\frac{c^{n+1}-1}{c-1}}$, vamos finalizar:
+\begin{align*}
+    T(n) = 8^{\log_2 n}\cdot [T(1) \rightarrow 1] + n \sum^{\log_2 n - 1}_{k=0}4^k \\
+    \text{Usando a fórmula dada:} \\
+    T(n) = n^{\log_2 8} + n(\frac{4^{\log_2 n} - 1}{4-1}) \\
+    T(n) = n^{3} + n(\frac{n^{\log_2 4} - 1}{3}) \\
+    = n^3 + n(\frac{n^2 -1}{3}) \\
+    T(n) = \frac{3n^3 + n^3 - n}{3} \\
+    = \frac{4n^3 -n}{3} \\
+    \therefore \boxed{T(n) = \Theta(n^3)}
+\end{align*}
+
+\section{Teorema mestre}
+\subsection{O que é}
+O método resolve recorrências da forma:
+\begin{align*}
+    T(n) = aT(\frac{n}{b}) + f(n)
+\end{align*}
+Ou seja,
+\begin{itemize}
+    \item \textbf{Use apenas em recorrências com divisão e conquista! }
+    \item \textbf{É extremamente importante dizer o caso do teorema mestre usado!}
+    \item \textbf{$\lg$ é sempre base 2}
+\end{itemize}
+
+
+Casos:
+\begin{enumerate}
+    \item Se $f(n) = O(n^{log_b a-\epsilon})$ para alguma constante $\epsilon > 0$, então $T(n) = \Theta(n^{\log_b a })$
+    \item Se $f(n) = O(n^{log_b a})$, então $T(n) = \Theta(n^{\log_b a} \lg n)$.
+    \item Se $f(n) = \Omega(n^{log_b a+\epsilon})$, para alguma constante $\epsilon > 0$, e se $af(\frac{n}{b}) \leq cf(n)$ para alguma constante $c > 1$ e $n$ suficientemente grande, então $T(n) = \Theta(f(n))$.
+\end{enumerate}
+
+\subsection{Exemplos}
+\subsubsection{Primeiro exemplo}
+
+\textit{Exemplo incompleto, consulte o segundo.}
+
+Resolva para: $T(n) = 9T(\frac{n}{3}) + n $
+
+Temos:
+\begin{align*}
+    a = 9\\
+    b = 3 \\
+    f(n) = n
+\end{align*}
+Então resolvemos como:
+\begin{align*}
+    n^{\log_b a} = n^{\log_3 9} = \Theta(n^2)
+\end{align*}
+Como $f(n) \dots$
+
+\subsubsection{Segundo exemplo}
+\begin{align*}
+    T(n) = T(\frac{2n}{3}) + 1 \\
+    a = 1 \\
+    b = \frac{3}{2} \\
+    f(n) = 1
+\end{align*}
+Vamos encontrar o caso:
+\begin{align*}
+    n^{\log_{\frac{3}{2}}1}= n^0 = 1
+\end{align*}
+
+Pelo \textit{caso 2} do teorema mestre:
+\begin{align*}
+    T(n) = \Theta(\lg n)
+\end{align*}
+
+
+\subsubsection{Terceiro exemplo}
+\begin{align*}
+    T(n) = 3T(\frac{n}{4}) + n \lg n \\
+    a = 3 \\
+    b = 4 \\
+    f(n) = n \lg n
+\end{align*}
+Vamos encontrar o caso:
+\begin{align*}
+    n^{\log_4 3}= n^{0,8...}
+\end{align*}
+
+Pelo \textit{caso 3} do teorema mestre:
+\begin{align*}
+    T(n) = \Theta(n \lg n)
+\end{align*}
+
+
+
+
+\end{document}

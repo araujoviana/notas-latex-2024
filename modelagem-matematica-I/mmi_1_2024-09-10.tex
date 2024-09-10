@@ -1,0 +1,150 @@
+\documentclass{article}
+\usepackage{graphicx} % Requerido para inserção de imagens
+\usepackage{amsmath} % Requerido para fórmulas matemáticas
+\usepackage{geometry} % Para ajustar as margens
+\geometry{a4paper, margin=1in} % Margens padrão para A4
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{svg}
+\usepackage{xcolor}
+
+
+\title{Modelagem Matemática I\\
+    \large Método Simplex em prática}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercício 1}
+
+\subsection{Enunciado}
+Maximize: $Z =2x_1 + x_2$
+
+Sujeito às restrições:
+\begin{align*}
+    3x_1+4x_2 \leq 6 \\
+    6x_1+x_2 \leq 3 \\
+    x_1,x_2 \geq 0
+\end{align*}
+
+\subsection{Modelagem e resolução}
+O objetivo é encontrar a solução ótima, através de várias soluções viáveis. Para encontrar a linha pivô existe uma linha de decisão,  mas não pensei em anotar.
+
+\textbf{Encontramos a solução ótima quando não existem mais valores negativos na linha Z da tabela.}
+\begin{align*}
+Z - 2x_1-x_2 = 0 \\
+\\
+    3x_1 + 4x_2 + x_3 + 0x_4 = 6 \\
+    6x_1 + x_2 + 0x_3 + x_4 = 3 \\
+    x_1,x_2,x_3,x_4 \geq 0
+\end{align*}
+
+Solução inicial básica = $(0,0,6,3)$
+
+Agora colocando isso tudo na tabela:
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c c c c | c c}
+       base  & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $b$ \\
+       \hline
+        $x_2$ & 3 & 4 & 1 & 0 & 6 \\
+        $x_4$ & 6 & 1 & 0 & 1 & 3 \\
+        \hline
+        $Z$ & -2 & -1 & 0 & 0 & 0 \\
+    \end{tabular}
+\end{table}
+As linhas aqui são denominadas como L1, L2 e L3.
+
+"a" e "b" são coordenadas na tabela, o "a" representa a parte dos xis:
+\begin{align*}
+    \boxed{\frac{b_1}{a_11} = \frac{6}{3} = 2} \\
+    \boxed{\frac{b_2}{a_21} = \frac{3}{6} = \frac{1}{2}} \\
+\end{align*}
+
+Em um problema real, você escreveria várias tabelas de acordo com o seu progresso.
+
+Agora fazendo isso:
+\begin{align*}
+    L_1 \leftarrow L_1 - 3L_2 \\
+    L_3 \leftarrow L_3 + 2L_2
+\end{align*}
+
+Aplicamos para a tabela
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c c c c | c c}
+       base  & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $b$ \\
+       \hline
+        $x_3$ & 3 & 4 & 1 & 0 & 6 \\
+         $x_4$ & 1 & $\frac{1}{6}$ & 0 & $\frac{1}{6}$ & $\frac{1}{2}$ \\
+         \hline
+        $Z$ & -2 & -1 & 0 & 0 & 0 \\
+    \end{tabular}
+\end{table}
+
+\clearpage
+
+E então,
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c c c c | c c}
+       base  & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $b$ \\
+       \hline
+        $x_3$ & 0 & $\frac{7}{2}$ & 1 & $-\frac{1}{2}$ & $\frac{9}{2}$ \\
+         $x_1$ & 1 & $\frac{1}{6}$ & 0 & $\frac{1}{6}$ & $\frac{1}{2}$ \\
+        \hline
+        $Z$ & 0 & $-\frac{2}{3}$ & 0 & $\frac{1}{3}$ & 1 \\
+    \end{tabular}
+\end{table}
+
+Analisando a tabela, vemos quais valores x têm valores usáveis para a solução, como no caso do $x_1$ e $x_3$, que valem 1, então colocamos eles na solução viável.
+Nova solução viável: $= (\frac{1}{2}, 0, \frac{9}{2}, 0)$
+
+Vamos formar uma nova tabela:
+\begin{align*}
+    \boxed{\frac{b_1}{a_21} = \frac{9}{2} \cdot \frac{2}{7} = \frac{9}{7}} \\
+    \frac{b_2}{a_22} = \frac{1}{2} \cdot \frac{6}{1} = 3
+\end{align*}
+
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c c c c | c c}
+       base  & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $b$ \\
+       \hline
+        $x_3$ & 0 & $1$ & $\frac{2}{7}$ & $-\frac{1}{7}$ & $\frac{9}{7}$ \\
+         $x_1$ & 1 & $\frac{1}{6}$ & 0 & $\frac{1}{6}$ & $\frac{1}{2}$ \\
+        \hline
+        $Z$ & 0 & $-\frac{2}{3}$ & 0 & $\frac{1}{3}$ & 1 \\
+    \end{tabular}
+\end{table}
+\begin{align*}
+    L_2 \leftarrow L_2 - \frac{1}{6}L_1 \\
+    -\frac{1}{6} \cdot \frac{2}{7} = - \frac{1}{21} \\
+    \frac{1}{5} + \frac{1}{6} \cdot \frac{1}{7} = \frac{1}{6}[1+\frac{1}{7}] = \frac{1}{6} \cdot \frac{8}{7} = \frac{4}{21} \\
+    \frac{1}{2} - \frac{1}{6} \cdot \frac{9}{7} = \frac{1}{2} - \frac{3}{14} = \frac{4}{14} = \frac{2}{7} \\
+    L_3 \leftarrow L_3 + \frac{2}{3}L_1 \\
+    \frac{2}{3} \cdot \frac{2}{7} = \frac{4}{21} \\
+    \frac{1}{3} - \frac{2}{3} \cdot \frac{1}{7} = \frac{1}{3}[1-\frac{2}{7}] = \frac{1}{3} \cdot \frac{5}{7} = \frac{5}{21} \\
+    1+\frac{2}{3} \cdot \frac{9}{7} = 1 + \frac{6}{7} = \frac{13}{7}
+\end{align*}
+\begin{table}[h!]
+    \centering
+    \begin{tabular}{ c | c c c c | c c}
+       base  & $x_1$ & $x_2$ & $x_3$ & $x_4$ & $b$ \\
+       \hline
+        $x_2$ & 0 & $1$ & $\frac{2}{7}$ & $-\frac{1}{7}$ & $\frac{9}{7}$ \\
+         $x_1$ & 1 & 0 & $-\frac{1}{21}$ & $\frac{4}{21}$ & $\frac{2}{7}$ \\
+        \hline
+        $Z$ & 0 & $0$ & $\frac{4}{21}$ & $\frac{5}{21}$ & $\frac{13}{7}$ \\
+    \end{tabular}
+\end{table}
+
+Solução ótima $\mathbf{= (\frac{2}{7}, \frac{9}{7}})$
+\begin{align*}
+    \boxed{Z = \frac{13}{7}}
+\end{align*}
+\end{document}
