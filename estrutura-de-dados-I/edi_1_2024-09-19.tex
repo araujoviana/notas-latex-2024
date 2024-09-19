@@ -1,0 +1,67 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+
+
+\title{Estrutura de Dados I
+\\ \large Deque (fila dupla)}
+\author{Matheus Gabriel}
+\date{Agosto 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Definição}
+
+Uma \textbf{fila dupla} é uma fila que permite a inserção e remoçãos dos elementos nas duas extremidades da fila.
+
+Importante:
+\begin{enumerate}
+    \item Ela não impõe a regra FIFO
+    \item Não é LIFO e FIFO
+    \item Há uma restrição: trabalhamos somente com as extremidades
+\end{enumerate}
+
+\section{Comandos}
+
+\begin{enumerate}
+    \item 
+    \begin{verbatim}
+        InsertFront(deque,elem)
+    \end{verbatim}
+     Insere o elemento elem no início da fila dupla deque 
+    \item 
+    \begin{verbatim}
+        InsertBack(deque,elem) 
+    \end{verbatim}
+    Insere o elemento elem no fim da fila dupla deque
+    \item 
+    \begin{verbatim}
+        RemoveFront(deque) 
+    \end{verbatim}
+    Remove o elemento elem no início da fila dupla deque
+    \item 
+    \begin{verbatim}
+        RemoveBack(deque) 
+    \end{verbatim}
+    Remove o elemento elem no final da fila dupla deque
+        \item 
+    \begin{verbatim}
+        IsFull(deque) 
+    \end{verbatim}
+    Verifica se o deque está cheio
+        \item 
+    \begin{verbatim}
+        IsEmpty(deque) 
+    \end{verbatim}
+    Verifica se o deque está vazio
+        \item 
+    \begin{verbatim}
+        Clear(deque) 
+    \end{verbatim}
+    Limpa o deque
+\end{enumerate}
+\end{document}
