@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{tcolorbox}
+\usepackage{hyperref}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{minted}
+\usepackage{fancyvrb}
+
+\title{Organização de Computadores \\
+    \large Alocação Dinâmica de Memória}
+\author{Matheus Gabriel}
+\date{Outubro 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Memória (Heap)}
+
+A memória é separada em:
+\begin{enumerate}
+    \item Stack
+    \item Heap
+    \item Data (variáveis não incializadas)
+    \item Data (variáveis inicializadas)
+    \item Text (Instruções do Programa Executável)
+\end{enumerate}
+
+O Heap é a usada para alocação dinâmica, que é feita durante a execução, isso inclui estruturas de dados dinâmicas, porém, é necessário liberar a memória após o uso para evitar vazamentos de memória.
+
+\end{document}

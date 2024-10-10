@@ -1,0 +1,112 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{listings}
+
+
+\lstset{
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    frame=single,
+}
+
+
+\title{Estrutura de Dados I
+\\ \large Lista (Encadeada ou em inglês, Linked List)}
+\author{Matheus Gabriel}
+\date{Outubro 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Definição}
+
+Costuma ser chamada apenas de lista, ela é:
+\begin{enumerate}
+    \item Conjunto de dados do mesmo tipo
+    \item \textbf{Não} Usamos indices para acessar os seus elementos, usamos \textbf{nós}
+\end{enumerate}
+
+\section{Nós (nodes)}
+
+Para acessar elementos na lista encadeada usamos \textbf{nós}, eles são alocados dinamicamente, conforme a necessidade. E também eles não precisam estar localizados sequencialmente na memória.
+
+\section{Vantagens e Desvantagens}
+
+Vantagens:
+\begin{enumerate}
+    \item Tamanho dinâmico
+    \item Não há deslocamento de memória na inserção de elementos
+    \item Remoção de elementos NÃO deixam "buracos" nos arrays
+\end{enumerate}
+
+Desvantagens:
+\begin{enumerate}
+    \item Nós não são sequenciais na memória
+    \item Custo extra de memória (\textit{Overhead})
+\end{enumerate}
+
+\section{Composição}
+Um nó da lista contém duas partes:
+\item 
+\begin{enumerate}
+    \item data $\rightarrow$ os dados armazenados no nó
+    \item *next $\rightarrow$ um ponteiro/referência para o próximo nó da lista (já que nós são armazenados sequencialmente na memória).
+\end{enumerate}
+
+Visualmente eles podem serem representados como:
+\begin{figure}[h!]
+    \centering
+    \includegraphics[width=0.5\linewidth]{image.png}
+\end{figure}
+
+\section{Implementação}
+
+Não é necessária a criação de uma classe Linked List, pode ter apenas o Nó \textit{head}.
+
+\subsection{Apenas o nó}
+\subsubsection{C}
+
+\begin{lstlisting}[language=C]
+struct Node {
+    char data;
+    struct Node* next;
+};
+\end{lstlisting}
+
+Repare que next é um ponteiro para outro Node (pode ser qualquer Node, incluindo ele mesmo). O tipo char no data é só um exemplo.
+
+\subsubsection{Java}
+\begin{lstlisting}[language=Java]
+public class Node {
+    private char data;
+    private Node next;
+
+    // Constructor, getter, setter, etc...
+}
+\end{lstlisting}
+
+Mais simples, porém a implementação é semelhante.
+
+\subsection{Usando a classe Linked List}
+
+\begin{lstlisting}[language=Java]
+public class LinkedList {
+    // Primeiro no
+    private Node head;
+
+    // OPCIONAL
+    // Ultimo no
+    private Node tail;
+    // Contador de nos
+    private int count;
+}
+\end{lstlisting}
+
+Na verdade, como nos códigos anteriores, a única parte necessária é o primeiro nó.
+\end{document}
