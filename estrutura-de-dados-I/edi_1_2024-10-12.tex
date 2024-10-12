@@ -1,0 +1,36 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage{minted}
+\usepackage{hyperref}
+\usepackage{tcolorbox}
+\usepackage{listings}
+
+\lstset{
+    basicstyle=\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{green},
+    stringstyle=\color{red},
+    frame=single,
+}
+
+\title{Estrutura de Dados I \\ \large Continuação de Linked List}
+\author{Matheus Gabriel}
+\date{Outubro 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Operações}
+
+\begin{enumerate}
+    \item \texttt{Count(list)} $\rightarrow$ retorna a quantidade de nós na lista \texttt{list}
+    \item \texttt{isEmpty(list)} $\rightarrow$ retorna \texttt{true} se a lista \texttt{list} estiver vazia
+    \item \texttt{Clear(list)} $\rightarrow$ esvazia a lista \texttt{list} (remove todos os nós da lista)
+    \item \texttt{getValue()} $\rightarrow$ \textbf{retorna o valor} do nó atual
+    \item \texttt{setValue()} $\rightarrow$ \textbf{define} o valor do nó atual
+    \item \texttt{getNext()} $\rightarrow$ \textbf{retorna} a referência (ou o próprio objeto) do próximo nó conectado
+    \item \texttt{setNext()} $\rightarrow$ \textbf{determina} a referência (ou o próprio objeto) do próximo nó conectado
+\end{enumerate}
+
+\end{document}

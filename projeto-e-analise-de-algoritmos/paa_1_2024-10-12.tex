@@ -1,0 +1,64 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\newcommand{\lp}{\Bigl(}
+\newcommand{\rp}{\Bigr)}
+\title{Projeto e Análise de Algoritmos \\
+\large Heap Sort}
+\author{Matheus Gabriel}
+\date{Outubro de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Árvores}
+
+\subsection{Definição}
+
+Árvores são grafos acíclicos conexos, ou seja:
+\begin{enumerate}
+    \item Não possuem ciclos de conexão
+    \item Não possuem partes soltas, são compostas por uma árvore inteira única (múltiplas árvores são uma \textit{floresta})
+\end{enumerate}
+
+\subsection{Composição}
+
+A árvore é composta por:
+
+\begin{enumerate}
+    \item Raiz
+    \item Nós internos
+    \item Folhas
+\end{enumerate}
+
+\section{Heap Sort}
+
+\subsection{Definição}
+
+Um algoritmo que tira proveito de uma estrutura de dados para obter melhoria assintótica em relação aos algoritmos de ordenação quadráticos no tempo.
+
+Esse é o \textbf{Heap de máximo}, com isso, o Heap Sort consegue rodar em tempo $O(n \lg n)$ e \textbf{localmente}.
+
+\subsection{Etapas da implementação}
+
+Certas etapas são importantes para manter o tempo de execução em $n \lg n$, geralmente usaríamos uma estrutura de dados auto referencial, porém, não será necessário criar ela separadamente, tudo é \textbf{local}.
+
+\subsubsection{Heaps}
+
+A estrutura de dados Heap (binário) se trata de um \textbf{vetor} que pode ser visto como uma árvore binária quase completa.
+
+Cada nó dela corresponde a um elemento do vetor.
+
+A árvore está preenchida em todos os níveis exceto, possivelmente, no mais baixo, que é preenchido a partir da esquerda.
+
+Importante e vale pesquisar: \texttt{Heap\_Max}
+
+\end{document}
