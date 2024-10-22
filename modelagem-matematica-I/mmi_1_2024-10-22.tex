@@ -1,0 +1,84 @@
+\documentclass{article}
+\usepackage{graphicx} % Requerido para inserção de imagens
+\usepackage{amsmath} % Requerido para fórmulas matemáticas
+\usepackage{geometry} % Para ajustar as margens
+\geometry{a4paper, margin=1in} % Margens padrão para A4
+\usepackage{csquotes}
+\usepackage{tcolorbox}
+\usepackage{svg}
+\usepackage{xcolor}
+
+
+\title{Modelagem Matemática I\\
+    \large Algoritmo do Transporte}
+\author{Matheus Gabriel}
+\date{Outubro 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Métodos para gerar a solução inicial}
+\begin{enumerate}
+    \item Método do Custo Mínimo
+    \item Método do Canto Noroeste
+\end{enumerate}
+\section{Método Noroeste gerado pelo GPT}
+
+\documentclass{article}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{graphicx}
+
+\begin{document}
+
+\title{Método do Noroeste para Problemas de Transporte}
+\author{}
+\date{}
+\maketitle
+
+\subsection{Introdução}
+O Método do Noroeste é uma técnica utilizada para encontrar uma solução inicial para problemas de transporte. O objetivo é minimizar os custos de transporte, distribuindo a carga de forma eficiente.
+
+\subsection{Passo a Passo}
+
+\subsubsection{1. Montar a tabela de custos}
+\begin{itemize}
+    \item Liste os fornecedores e os consumidores.
+    \item Crie uma tabela com os custos de transporte entre cada fornecedor e consumidor.
+    \item Insira as ofertas (quantidades disponíveis) dos fornecedores e as demandas (quantidades necessárias) dos consumidores.
+\end{itemize}
+
+\subsubsection{2. Selecionar o canto noroeste}
+\begin{itemize}
+    \item Comece pelo canto noroeste da tabela (célula na posição [1,1]).
+\end{itemize}
+
+\subsubsection{3. Atribuir o máximo possível}
+\begin{itemize}
+    \item Atribua o máximo possível de unidades para a célula selecionada, que é o mínimo entre a oferta do fornecedor e a demanda do consumidor.
+    \item Atualize a oferta e a demanda, subtraindo a quantidade atribuída.
+\end{itemize}
+
+\subsubsection{4. Verificar se a oferta ou a demanda foi satisfeita}
+\begin{itemize}
+    \item Se a oferta do fornecedor for satisfeita, mova-se para a próxima linha.
+    \item Se a demanda do consumidor for satisfeita, mova-se para a próxima coluna.
+\end{itemize}
+
+\subsubsection{5. Repetir o processo}
+\begin{itemize}
+    \item Continue a atribuir unidades nas células adjacentes, sempre movendo-se para o canto noroeste da célula que acabou de ser preenchida, até que todas as ofertas e demandas sejam atendidas.
+\end{itemize}
+
+\subsubsection{6. Finalizar a tabela}
+\begin{itemize}
+    \item Ao finalizar, verifique se todas as ofertas e demandas foram atendidas.
+    \item A tabela final mostrará a quantidade de unidades a serem transportadas entre cada fornecedor e consumidor.
+\end{itemize}
+
+\subsection{Conclusão}
+O Método do Noroeste é um método simples e eficiente para encontrar uma solução inicial em problemas de transporte. A partir dessa solução, é possível aplicar métodos de otimização para minimizar ainda mais os custos.
+
+\end{document}
+

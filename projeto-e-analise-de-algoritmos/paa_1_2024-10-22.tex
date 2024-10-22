@@ -1,0 +1,55 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+\newcommand{\lp}{\Bigl(}
+\newcommand{\rp}{\Bigr)}
+\title{Projeto e Análise de Algoritmos \\
+\large Continuação de Heap Sort}
+\author{Matheus Gabriel}
+\date{Outubro de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Heap de Máximo (Heap-max)}
+
+Eles possuem a propriedade de que \textbf{}
+
+\subsection{Pseudocódigo}
+
+O \texttt{i} se refere ao índice (começando por 1) do vetor.
+
+\begin{verbatim}
+    Parent(i)
+        return [i/2]
+
+    Left(i)
+        return 2i
+
+    Right(i)
+        return 2i+1
+\end{verbatim}
+
+\section{Afunda (Max-Heapify)}
+
+Essa operação é o coração do Heap Sort.
+
+Suponha um "quase heap-max" cujo único problema seja a raiz, \textit{ou seja}, a raiz não preenche a propriedade max-heap: $A[\text{Parent}(i)] \geq A[i]$
+
+O \textit{afunda} trabalha para recolocar a raiz (correta) em sua posição final.
+
+
+\begin{tcolorbox}[colback=yellow!10!white, colframe=orange!80!black, title=Aviso]
+    É recomendável visualizar o algoritmo de Heap Sort usando um visualizador interativo para entender melhor seu funcionamento e a estrutura de dados envolvida.
+\end{tcolorbox}
+
+\textbf{Ordenar o Heap Max != Criar o Heap Max}
+\end{document}
