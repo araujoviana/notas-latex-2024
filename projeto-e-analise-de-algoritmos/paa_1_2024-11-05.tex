@@ -1,0 +1,60 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{minted} 
+\usepackage{mathtools}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\usepackage{cancel}
+\usepackage{xcolor}
+\usepackage{tcolorbox}
+
+\usepackage{tikz}
+\usetikzlibrary{trees}
+
+\newcommand{\lp}{\Bigl(}
+\newcommand{\rp}{\Bigr)}
+\title{Projeto e Análise de Algoritmos \\
+\large Exercícios de Heap Sort}
+\author{Matheus Gabriel}
+\date{Outubro de 2024}
+
+\begin{document}
+
+\maketitle
+
+\section{Exercício 1}
+
+\subsection{Enunciado}
+
+\textbf{Faltou desenhar a árvore...}
+
+A árvore de decisão para o insertion sort operando sobre 3 elementos. Um nó interno anotado por $i:j$ indica a comparação entre $a_i$ e $a_j$. Uma folha anotada pela permutação $<\pi_{(1)},\pi_2, \dots, \pi_{(n)} >$ indica a ordenação $a_{\pi_{(1)}} \leq a_{\pi_{(2)}} \leq \dots \leq a_{\pi_{(n)}}$. O caminho sombreado indica as decisões feitas para ordenar a sequência de entrada $<a_1=6,a_2=8,a_3=5>$. A permutação $<3,1,2>$ na folha indica a sequência ordenada é $a_3 = 5 \leq a_1 = 6 \leq a_2 = 8$. Há $3! = 6$ possíveis permutações dos elementos de entrada, portanto a árvore de decisão deve ter no mínimo 6 folhas.
+
+\section{O Modelo de Árvore de Decisão}
+
+\subsection{Introdução}
+
+Podemos ver algoritmos de ordenação por comparação em termos de árvores de decisão. Uma árvore binária completa que representa as comparações entre os elementos que são feitas por um determinado algoritmo de ordenação operando sobre uma entrada de um determinado tamanho. Controle, movimentação de dados, e todos os outros aspectos do algoritmo são ignorados.
+
+\subsection{Um limite inferior para o pior caso}
+
+O tamanho do caminho mais longo da raiz até qualquer folha  em uma árvore de decisão representa o pior caso para o número de comparações que um dado algoritmo efetua. Consequentemente, o pior caso para o número de comparações para um dado algorítmo de ordenação por comparação é igual a altura de  sua árvore de decisão.
+
+\begin{tcolorbox}[
+    colback=blue!5,
+    colframe=blue!80!black,
+    title=Teorema,
+    fonttitle=\bfseries,
+    enhanced,
+    boxrule=0.8mm,
+    left=5mm,
+    right=5mm,
+    top=5mm,
+    bottom=5mm
+]
+Qualquer algoritmo de ordenação por comparação requer $\omega (n \lg n)$ comparações no pior caso.
+\end{tcolorbox}
+
+
+\end{document}

@@ -1,0 +1,78 @@
+% Created 2024-10-31 qui 10:43
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Matheus Gabriel}
+\date{\textit{<2024-10-31 qui>}}
+\title{Estrutura de Dados I\\\medskip
+\large Lista duplamente encadeada}
+\hypersetup{
+ pdfauthor={Matheus Gabriel},
+ pdftitle={Estrutura de Dados I},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.7.11)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Introdução à lista duplamente encadeada}
+\label{sec:orgb87dddc}
+
+Na lista duplamente encadeada (diferente da simplesmente encadeada) o nó possui um endereço tanto pra trás dele quanto para frente, e além do \emph{head} que aponta para o primeiro elemento, também temos obrigatoriamente o \emph{tail} que sempre aponta para o último elemento.
+\subsection{Estrutura Visual com Graphviz}
+\label{sec:org7d7e243}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{linked_list_double.png}
+\label{}
+\end{center}
+\subsection{Estrutura Visual Circular com Graphviz}
+\label{sec:org36f1bfb}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{circular_linked_list.png}
+\label{}
+\end{center}
+\subsection{Estrutura Visual da Lista Duplamente Encadeada Circular com Graphviz}
+\label{sec:orgd5accfd}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{circular_doubly_linked_list.png}
+\label{}
+\end{center}
+
+A imagem ta meio errada mas a ideia permanece
+\subsection{Estrutura}
+\label{sec:org0e57cab}
+
+No caso, a estrutura seria:
+\begin{enumerate}
+\item \texttt{previous}
+\item \texttt{conteúdo}
+\item \texttt{next}
+\end{enumerate}
+Além disso, opcionalmente é possivel ter um cursor \textbf{current} que armazena o nó atual sendo verificado.
+\subsubsection{Importante, estilo pergunta de prova}
+\label{sec:org9b06136}
+\begin{quote}
+Os TADs da lista circular e da lista [circular] duplamente encadeada
+são similares ao TAD da lista simplesmente encadeada.
+\end{quote}
+
+Se eu alterar uma lista simplesmente encadeada por uma lista circular duplamente encadeada (por exemplo), o funcionamento não deveria quebrar, embora a abordagem interna mude um pouco (por motivos óbvios né, são tipos de lista diferentes).
+
+Outra coisa, importante saber o que o \texttt{static} faz
+\end{document}
