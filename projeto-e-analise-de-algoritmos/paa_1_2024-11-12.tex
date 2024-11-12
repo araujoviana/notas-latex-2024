@@ -1,0 +1,78 @@
+% Created 2024-11-12 ter 10:24
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Matheus Gabriel}
+\date{Novembro 2024}
+\title{Projeto e Análise de Algorítmos I\\\medskip
+\large Continuação do Selection}
+\hypersetup{
+ pdfauthor={Matheus Gabriel},
+ pdftitle={Projeto e Análise de Algorítmos I},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.7.11)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Sobre a figura}
+\label{sec:org5a94824}
+
+Os \(n\) elementos são representados por pequenos circulos e cada gruoo ocupa uma coluna. As medianas dos grupos são brancas, e a mediana das medianas está identificada como \(x\) (quando encontramos a mediana de um número par de elementos, usamos a mediana inferior). São traçadas setas de elementos maiores para elementos menores e, a partir disso, podemos ver que 3 elementos em cada grupo de 5 elementos à direta de \(x\) são maiores que \(x\), e 3 em cada grupo de 5 elementos à esquerda de \(x\) são menores que \(x\). Os elementos maiores que \(x\) são mostrados sob um plano de fundo sombreado.
+\section{Sobre o Select}
+\label{sec:org8c0ffbc}
+
+O algoritmo \textbf{SELECT} determina o i-ésimo menor elem de um vetor de entrada de \(n >1\) elementos, executando as etapas a seguir (se \(n = 1\), então SELECT simplesmente retorna seu único valor de entrada como i-ésimo menor).
+\subsection{Operação}
+\label{sec:orgf65eda1}
+\begin{enumerate}
+\item Dividir os \(n\) elementos do vetor de entrada em \(\lfloor \frac{n}{5} \rfloor\) grupos de 5 elementos cada e no máximo um grupo formado pelos \(n mod 5\) elementos restantes.
+
+\item Encontrar a mediana de cada um dos \(\lceil \frac{n}{5} \rceil\) grupos, primeiro através da ordenação por inserção dos elementos de cada grupo (há 5 no máximo), e depois escolhendo a mediana de lista ordenada de elementos de grupos.
+
+\item Usar SELECT recursivamente para achar a mediana \(x\) das \(\lceil \frac{n}{5} \rceil\) medianas localizadas na etapa 2 (se houver numero par, \(x\) é a mediana inferior).
+
+\item Particionar o vetor de entrada em torno da mediana de medianas \(x\), usando uma versão modificada de \textbf{PARTITION}. Seja \(k\) uma unidade maior que o número de elementos no lado baixo da partição, de modo que \(x\) seja o k-ésimo menor elemento e existam \(n-k\) elementos no lado alto da partição.
+
+Se \(i = k\), então retornar \(x\). Caso contrário, usar SELECT recursivamente para encontrar o i-ésimo menor elemento no lado baixo se \(i \leq k\), ou então o \((i-k)\) -ésimo menor elemento do lado alto, se \(i >k\).
+\end{enumerate}
+\subsection{Resolvendo uma recorrência}
+\label{sec:orgb79f041}
+
+$\backslash$[
+T(n) =
+\begin{cases}
+\Theta(1), & \text{se } n \leq 140 \\
+T\left(\left\lceil \frac{n}{5} \right\rceil\right) + T\left(\frac{7n}{10} + 6\right) + O(n), & \text{se } n > 140
+\end{cases}
+$\backslash$]
+
+Tempo O(n) no pior caso
+\section{Radix Sort}
+\label{sec:org6bac0e3}
+
+Radix sort é algoritmo usado por máquinas de ordenação de cartão (antigas). Radix ordena resolvendo de modo contra intuitivo, ordenando o digito menos significativo primeiro.
+\subsection{Código}
+\label{sec:orgd8583f6}
+
+Suponha que cada elemento no vetor de \(n\) elementos tem \(d\) digitos.
+
+\begin{verbatim}
+RADIX SORT(A, d)
+for i \leftarrow 1 to d
+    do use um algoritmo de ordenação estável para ordenar o vetor A sobre o digito i
+\end{verbatim}
+\end{document}

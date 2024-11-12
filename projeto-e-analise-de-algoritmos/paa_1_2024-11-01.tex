@@ -1,0 +1,108 @@
+% Created 2024-11-01 sex 10:57
+% Intended LaTeX compiler: pdflatex
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\author{Matheus Gabriel}
+\date{Novembro 2024}
+\title{Projeto e Análise de Algorítmos I\\\medskip
+\large Ordenando em O(n)}
+\hypersetup{
+ pdfauthor={Matheus Gabriel},
+ pdftitle={Projeto e Análise de Algorítmos I},
+ pdfkeywords={},
+ pdfsubject={},
+ pdfcreator={Emacs 29.4 (Org mode 9.7.11)}, 
+ pdflang={English}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{Ordenando em O(n)}
+\label{sec:orgbb0ca90}
+Lembrando que o teorema original dizia:
+\begin{quote}
+Qualquer algoritmo de ordenação por comparação requer \(\omega(n \lg n)\) comparações no pior caso.
+\end{quote}
+\subsection{Problema de ordenação}
+\label{sec:org4d234b2}
+
+\subsubsection{Enunciado}
+\label{sec:org8816c93}
+Escreva um algoritmo de ordenação para ordenar números inteiros de 1 até 99999, não repetidos.
+Este algoritmo deve rodar em \(O(n)\) para o pior caso.
+\subsubsection{Minha hipótese}
+\label{sec:org4ce77d2}
+Simplesmente imprima os números de 1 a 99999
+\subsubsection{Uma das soluções}
+\label{sec:org3a0dc12}
+\begin{enumerate}
+\item Algoritmo para Ordenar Lista de 1 a 99,999 em O(n)
+\label{sec:org5c1f8ce}
+
+Este método ordena uma lista contendo números únicos de 1 a 99,999 em tempo O(n) usando uma lista auxiliar indexada diretamente.
+\begin{enumerate}
+\item Passos para Implementação
+\label{sec:orgcba410b}
+\begin{enumerate}
+\item Inicialize uma lista auxiliar de tamanho 99,999. Cada posição representa um número na faixa de 1 a 99,999.
+\item Percorra a lista original e insira cada número na posição correspondente na lista auxiliar:
+\begin{itemize}
+\item Exemplo: Coloque o número 1 na posição 0, o número 2 na posição 1, e assim por diante.
+\end{itemize}
+\item A lista auxiliar estará automaticamente ordenada após a inserção de todos os elementos.
+\end{enumerate}
+\item Implementação pequena em Python
+\label{sec:org4739190}
+\begin{verbatim}
+import random
+
+def counting_sort(arr):
+    # Inicializa o contador com zeros para cada número entre 0 e 9
+    count = [0] * 10
+    output = [0] * len(arr)
+
+    # Conta a ocorrência de cada elemento na lista
+    for num in arr:
+        count[num] += 1
+
+    # Atualiza o contador para armazenar as posições dos elementos
+    for i in range(1, 10):
+        count[i] += count[i - 1]
+
+    # Constrói a lista de saída de forma ordenada
+    for num in reversed(arr):
+        output[count[num] - 1] = num
+        count[num] -= 1
+
+    return output
+
+# Gera uma lista aleatória de 0 a 9 sem repetições
+arr = random.sample(range(10), 10)
+
+# Aplica o Counting Sort
+sorted_arr = counting_sort(arr)
+
+return arr, sorted_arr
+\end{verbatim}
+\begin{enumerate}
+\item Complexidade
+\label{sec:org36df2ee}
+\begin{itemize}
+\item \textbf{Tempo}: O(n), pois percorremos a lista uma vez e inserimos cada elemento diretamente na posição.
+\item \textbf{Espaço}: O(n), pois utilizamos uma lista auxiliar de tamanho 99,999.
+\end{itemize}
+\end{enumerate}
+\end{enumerate}
+\end{enumerate}
+\end{document}
